@@ -1,6 +1,6 @@
 /**
  * Created by zyongliu on 12/11/16.
  */
-public class StartingLand extends Place {
+public class StartingPoint extends Place {
 
 }

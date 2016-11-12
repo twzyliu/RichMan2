@@ -22,15 +22,16 @@ public class Player {
     private int prisonDays = 0;
     private int hosipatilDays = 0;
     private int point = 0;
-    private int barricade = 0;
-    private int robot = 0;
-    private int bomb = 0;
+    private int barricades = 0;
+    private int robots = 0;
+    private int bombs = 0;
     private List<Item> items = new ArrayList<>();
 
     public Player(String name, Dice dice, GameMap map) {
         this.name = name;
         this.dice = dice;
         this.map = map;
+        map.move(position, 0);
     }
 
     public STATUS getStatus() {
@@ -71,7 +72,7 @@ public class Player {
             status = STATUS.TURN_END;
         } else if (place instanceof MagicLand) {
             status = STATUS.TURN_END;
-        } else if (place instanceof StartingLand) {
+        } else if (place instanceof StartingPoint) {
             status = STATUS.TURN_END;
         }
     }
@@ -130,7 +131,7 @@ public class Player {
     }
 
     public int getToolsNum() {
-        return barricade + robot + bomb;
+        return barricades + robots + bombs;
     }
 
     public void gainPoint(int point) {
@@ -142,7 +143,7 @@ public class Player {
     }
 
     public void gainBarricade() {
-        barricade += 1;
+        barricades += 1;
     }
 
     public int getGodDays() {
@@ -153,16 +154,36 @@ public class Player {
         return position;
     }
 
-    public void block(int step) {
-        boolean hasBarricade = barricade >= 1;
+    public boolean block(int step) {
+        status = STATUS.WAIT_FOR_COMMAND;
+        boolean hasBarricade = barricades >= 1;
         boolean notFar = step > -11 & step < 11;
         int target = position + step;
         Place place = map.getPlace(target);
         if (hasBarricade & notFar & place.isEmpty()) {
             place.setStatus(Place.BARRICADE);
-            barricade -= 1;
+            barricades -= 1;
+            return true;
         }
+        return false;
+    }
+
+    public boolean bomb(int step) {
         status = STATUS.WAIT_FOR_COMMAND;
+        boolean hasBombs = bombs >= 1;
+        boolean notFar = step > -11 & step < 11;
+        int target = position + step;
+        Place place = map.getPlace(target);
+        if (hasBombs & notFar & place.isEmpty()) {
+            place.setStatus(Place.BOMB);
+            bombs -= 1;
+            return true;
+        }
+        return false;
+    }
+
+    public void gainBomb() {
+        bombs += 1;
     }
 
     public enum STATUS {

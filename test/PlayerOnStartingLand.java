@@ -15,15 +15,15 @@ public class PlayerOnStartingLand {
     private Dice dice;
     private GameMap map;
     private Player player;
-    private StartingLand startingLand;
+    private StartingPoint startingPoint;
 
     @Before
     public void setUp() throws Exception {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
-        startingLand = mock(StartingLand.class);
+        startingPoint = mock(StartingPoint.class);
         player = new Player(PLAYER_A, dice, map);
-        when(map.getPlace(anyInt())).thenReturn(startingLand);
+        when(map.getPlace(anyInt())).thenReturn(startingPoint);
     }
 
     @Test

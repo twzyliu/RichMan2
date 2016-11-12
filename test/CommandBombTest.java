@@ -8,7 +8,7 @@ import static org.mockito.Mockito.mock;
 /**
  * Created by zyongliu on 12/11/16.
  */
-public class CommandBlockTest {
+public class CommandBombTest {
     private static final String PLAYER_A = "A";
     public static final int STEP = 1;
     private static final int FAR_STEP = 15;
@@ -28,63 +28,53 @@ public class CommandBlockTest {
     }
 
     @Test
-    public void cannot_use_barricade_when_no_enough_barricade() throws Exception {
+    public void cannot_use_bomb_when_no_enough_bombs() throws Exception {
         int itemsNum = player.getToolsNum();
 
-        assertThat(player.block(STEP), is(false));
+        assertThat(player.bomb(STEP), is(false));
         assertThat(player.getToolsNum(), is(itemsNum));
         assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
     }
 
     @Test
-    public void cannot_use_barricade_when_position_is_too_far() throws Exception {
-        player.gainBarricade();
+    public void cannot_use_bomb_when_position_is_too_far() throws Exception {
+        player.gainBomb();
         int itemsNum = player.getToolsNum();
 
-        assertThat(player.block(FAR_STEP), is(false));
+        assertThat(player.bomb(FAR_STEP), is(false));
         assertThat(player.getToolsNum(), is(itemsNum));
         assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
     }
 
     @Test
-    public void cannot_use_barricade_when_item_on_target() throws Exception {
-        player.gainBarricade();
-        player.gainBarricade();
-        player.block(STEP);
+    public void cannot_use_bomb_when_item_on_target() throws Exception {
+        player.gainBomb();
+        player.gainBomb();
+        player.bomb(STEP);
         int itemsNum = player.getToolsNum();
 
-        assertThat(player.block(STEP), is(false));
+        assertThat(player.bomb(STEP), is(false));
         assertThat(player.getToolsNum(), is(itemsNum));
         assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
     }
 
     @Test
-    public void cannot_use_barricade_when_player_on_target() throws Exception {
-        player.gainBarricade();
+    public void cannot_use_bomb_when_player_on_target() throws Exception {
+        player.gainBomb();
 
-        assertThat(player.block(SELF_POSITION), is(false));
+        assertThat(player.bomb(SELF_POSITION), is(false));
         assertThat(player.getToolsNum(), is(player.getToolsNum()));
         assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
     }
 
     @Test
-    public void should_change_map_when_use_barricade() throws Exception {
-        player.gainBarricade();
+    public void should_change_map_when_use_bomb() throws Exception {
+        player.gainBomb();
         int itemsNum = player.getToolsNum();
 
-        assertThat(player.block(STEP), is(true));
+        assertThat(player.bomb(STEP), is(true));
         assertThat(player.getToolsNum(), is(itemsNum - 1));
-        assertThat(gameMap.getPlace(player.getPosition() + STEP).getStatus(), is(Place.BARRICADE));
+        assertThat(gameMap.getPlace(player.getPosition() + STEP).getStatus(), is(Place.BOMB));
         assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
     }
 }
-
-
-
-
-
-
-
-
-
-
