@@ -25,7 +25,6 @@ public class Player {
     private int barricades = 0;
     private int robots = 0;
     private int bombs = 0;
-    private List<Item> items = new ArrayList<>();
 
     public Player(String name, Dice dice, GameMap map) {
         this.name = name;
@@ -186,27 +185,47 @@ public class Player {
         bombs += 1;
     }
 
+    public boolean sell(int myland) {
+        status = STATUS.WAIT_FOR_COMMAND;
+        EmptyLand emptyLand = (EmptyLand) map.getPlace(myland);
+        if (places.contains(emptyLand)) {
+            money += emptyLand.getSellMoney();
+            emptyLand.setOwner(null);
+            emptyLand.initLevel();
+            return true;
+        }
+        return false;
+    }
+
+    public void buyLand() {
+        EmptyLand place = (EmptyLand) map.getPlace(position);
+        if (money >= place.getPrice()) {
+            place.setOwner(this);
+            places.add(place);
+            money -= place.getPrice();
+        }
+    }
+
+    public void upgradeLand() {
+        EmptyLand place = (EmptyLand) map.getPlace(position);
+        if (money >= place.getPrice() & place.getLevel() < EmptyLand.MAXLEVEL) {
+            place.levelUP();
+            money -= place.getPrice();
+        }
+    }
+
     public enum STATUS {
         TURN_END, WAIT_FOR_BUY_COMMAND {
             @Override
             public void sayYes(Player player) {
                 player.status = STATUS.TURN_END;
-                EmptyLand place = (EmptyLand) player.map.getPlace(player.position);
-                if (player.money >= place.getPrice()) {
-                    place.setOwner(player);
-                    player.places.add(place);
-                    player.money -= place.getPrice();
-                }
+                player.buyLand();
             }
         }, WAIT_FOR_UPGRADE_COMMAND {
             @Override
             public void sayYes(Player player) {
                 player.status = STATUS.TURN_END;
-                EmptyLand place = (EmptyLand) player.map.getPlace(player.position);
-                if (player.money >= place.getPrice() & place.getLevel() < EmptyLand.MAXLEVEL) {
-                    place.levelUP();
-                    player.money -= place.getPrice();
-                }
+                player.upgradeLand();
             }
         }, TURN_START, GAME_OVER, WAIT_FOR_TOOLS_COMMAND {
             @Override
