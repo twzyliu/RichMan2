@@ -240,6 +240,20 @@ public class Player {
         return false;
     }
 
+    public void gainRobot() {
+        robots += 1;
+    }
+
+    public boolean robot() {
+        status = STATUS.WAIT_FOR_COMMAND;
+        if (robots > 0) {
+            map.clearTool(position);
+            robots -= 1;
+            return true;
+        }
+        return false;
+    }
+
     public enum STATUS {
         TURN_END, WAIT_FOR_BUY_COMMAND {
             @Override
