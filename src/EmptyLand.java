@@ -3,7 +3,7 @@ import static java.lang.Math.pow;
 /**
  * Created by zyongliu on 11/11/16.
  */
-public class EmptyLand implements Place {
+public class EmptyLand extends Place {
     public static final int MAXLEVEL = 3;
     private Player owner;
     private int price;
@@ -36,4 +36,5 @@ public class EmptyLand implements Place {
     public int getBill() {
         return (int)((price / 2) * pow(2, level));
     }
+
 }

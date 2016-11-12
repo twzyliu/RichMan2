@@ -1,5 +1,5 @@
 /**
  * Created by zyongliu on 12/11/16.
  */
-public class MagicLand extends Place{
+public class Prison extends Place{
 }

@@ -10,26 +10,25 @@ import static org.mockito.Mockito.when;
 /**
  * Created by zyongliu on 12/11/16.
  */
-public class PlayerOnPrisonTest {
+public class PlayerOnStartingLand {
     private static final String PLAYER_A = "A";
     private Dice dice;
     private GameMap map;
-    private Prison prison;
     private Player player;
+    private StartingLand startingLand;
 
     @Before
     public void setUp() throws Exception {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
-        prison = mock(Prison.class);
+        startingLand = mock(StartingLand.class);
         player = new Player(PLAYER_A, dice, map);
-        when(map.getPlace(anyInt())).thenReturn(prison);
+        when(map.getPlace(anyInt())).thenReturn(startingLand);
     }
 
     @Test
-    public void should_stay_two_days_when_on_prison() throws Exception {
+    public void should_end_turn_when_on_startingland() throws Exception {
         player.roll();
-        assertThat(player.getPrisonDays(), is(Player.PRISON_DAY));
         assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
     }
 }

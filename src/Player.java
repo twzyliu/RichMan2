@@ -22,6 +22,9 @@ public class Player {
     private int prisonDays = 0;
     private int hosipatilDays = 0;
     private int point = 0;
+    private int barricade = 0;
+    private int robot = 0;
+    private int bomb = 0;
     private List<Item> items = new ArrayList<>();
 
     public Player(String name, Dice dice, GameMap map) {
@@ -63,10 +66,12 @@ public class Player {
             status = STATUS.TURN_END;
         } else if (place instanceof Hospital) {
             status = STATUS.TURN_END;
-        } else if (place instanceof PrisonLand) {
+        } else if (place instanceof Prison) {
             gotoPrison();
             status = STATUS.TURN_END;
         } else if (place instanceof MagicLand) {
+            status = STATUS.TURN_END;
+        } else if (place instanceof StartingLand) {
             status = STATUS.TURN_END;
         }
     }
@@ -124,12 +129,8 @@ public class Player {
         status.command(this, command);
     }
 
-    public int getItemsNum() {
-        return items.size();
-    }
-
-    public List<Item> getItems() {
-        return items;
+    public int getToolsNum() {
+        return barricade + robot + bomb;
     }
 
     public void gainPoint(int point) {
@@ -140,8 +141,28 @@ public class Player {
         this.money += money;
     }
 
+    public void gainBarricade() {
+        barricade += 1;
+    }
+
     public int getGodDays() {
         return godDays;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void block(int step) {
+        boolean hasBarricade = barricade >= 1;
+        boolean notFar = step > -11 & step < 11;
+        int target = position + step;
+        Place place = map.getPlace(target);
+        if (hasBarricade & notFar & place.isEmpty()) {
+            place.setStatus(Place.BARRICADE);
+            barricade -= 1;
+        }
+        status = STATUS.WAIT_FOR_COMMAND;
     }
 
     public enum STATUS {
@@ -172,9 +193,9 @@ public class Player {
                 if (command.equals(Command.TOOLS_EXIT)) {
                     player.status = STATUS.TURN_END;
                 } else if (command.equals(Command.TOOLS_BARRICADE)) {
-                    if (player.point >= Barricade.POINT & player.getItemsNum() < MAX_TOOLS_NUM) {
+                    if (player.point >= Barricade.POINT & player.getToolsNum() < MAX_TOOLS_NUM) {
                         player.point -= Barricade.POINT;
-                        player.items.add(new Barricade());
+                        player.gainBarricade();
                     }
                     player.status = STATUS.WAIT_FOR_TOOLS_COMMAND;
                 }
@@ -192,7 +213,7 @@ public class Player {
                 }
                 player.status = STATUS.TURN_END;
             }
-        };
+        }, WAIT_FOR_COMMAND;
 
         public void sayYes(Player player) {
             player.status = STATUS.TURN_END;
