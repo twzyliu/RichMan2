@@ -40,11 +40,13 @@ public class CommandSellTest {
     public void should_change_money_and_emptyland_status_when_sell() throws Exception {
         player.buyLand();
         int money = player.getMoney();
+        int placeNum = player.getPlaces().size();
 
         assertThat(player.sell(MYLAND), is(true));
         assertThat(player.getMoney(), is(money + emptyLand.getSellMoney()));
         assertThat(emptyLand.getLevel(), is(INIT_LEVEL));
         assertNull(emptyLand.getOwner());
+        assertThat(player.getPlaces().size(), is(placeNum - 1));
         assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
     }
 }

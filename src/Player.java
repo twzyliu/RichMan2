@@ -189,6 +189,7 @@ public class Player {
         status = STATUS.WAIT_FOR_COMMAND;
         EmptyLand emptyLand = (EmptyLand) map.getPlace(myland);
         if (places.contains(emptyLand)) {
+            places.remove(emptyLand);
             money += emptyLand.getSellMoney();
             emptyLand.setOwner(null);
             emptyLand.initLevel();
@@ -214,6 +215,31 @@ public class Player {
         }
     }
 
+
+    public boolean sellTool(Item item) {
+        status = STATUS.WAIT_FOR_COMMAND;
+        if (item instanceof Barricade) {
+            if (barricades > 0) {
+                point += item.getPoint();
+                barricades -= 1;
+                return true;
+            }
+        } else if (item instanceof Robot) {
+            if (robots > 0) {
+                point += item.getPoint();
+                robots -= 1;
+                return true;
+            }
+        } else if (item instanceof Bomb) {
+            if (bombs > 0) {
+                point += item.getPoint();
+                bombs -= 1;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public enum STATUS {
         TURN_END, WAIT_FOR_BUY_COMMAND {
             @Override
@@ -233,8 +259,8 @@ public class Player {
                 if (command.equals(Command.TOOLS_EXIT)) {
                     player.status = STATUS.TURN_END;
                 } else if (command.equals(Command.TOOLS_BARRICADE)) {
-                    if (player.point >= Barricade.POINT & player.getToolsNum() < MAX_TOOLS_NUM) {
-                        player.point -= Barricade.POINT;
+                    if (player.point >= Item.BARRICADE_POINT & player.getToolsNum() < MAX_TOOLS_NUM) {
+                        player.point -= Item.BARRICADE_POINT;
                         player.gainBarricade();
                     }
                     player.status = STATUS.WAIT_FOR_TOOLS_COMMAND;
