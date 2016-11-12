@@ -57,7 +57,7 @@ public class PlayerOnOthersLandTest {
     public void should_not_pay_when_player_walk_to_others_land_and_hasgod() throws Exception {
         when(emptyLand.getPrice()).thenReturn(LOWPRICE);
 
-        player.getGod();
+        player.gainGod();
         int money = player.getMoney();
         player.roll();
         assertThat(player.getMoney(), is(money));
@@ -68,7 +68,7 @@ public class PlayerOnOthersLandTest {
     public void should_not_pay_when_player_walk_to_others_land_and_inprison() throws Exception {
         when(emptyLand.getPrice()).thenReturn(LOWPRICE);
 
-        other.intoPrison();
+        other.gotoPrison();
         int money = player.getMoney();
         player.roll();
         assertThat(player.getMoney(), is(money));
@@ -79,7 +79,7 @@ public class PlayerOnOthersLandTest {
     public void should_not_pay_when_player_walk_to_others_land_and_inhospital() throws Exception {
         when(emptyLand.getPrice()).thenReturn(LOWPRICE);
 
-        other.intoHosipital();
+        other.gotoHosipital();
         int money = player.getMoney();
         player.roll();
         assertThat(player.getMoney(), is(money));
