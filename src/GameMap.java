@@ -8,17 +8,36 @@ import static java.util.Arrays.asList;
  */
 public class GameMap {
 
-    public static final int ROBOT_SETP = 10;
+    public static final int ROBOT_STEP = 10;
     private List<Place> places = new ArrayList<>();
 
     public GameMap(Place... gameMaps) {
         this.places = asList(gameMaps);
     }
 
-    public int move(int position, int roll) {
-        int target = (position + roll) % getSize();
+    public int move(Player player, int step) {
+        int position = player.getPosition();
+        int target = (position + step) % getSize();
+        for (int index = position + 1; index < (position + 1 + step); index++) {
+            int status = getPlace(index).getStatus();
+            if (status == Place.BARRICADE) {
+                target = index;
+            } else if (status == Place.BOMB) {
+                target = getHosipitalPosition();
+                player.gotoHosipital();
+            }
+        }
         getPlace(target).setStatus(Place.PLAYER);
         return target;
+    }
+
+    public int getHosipitalPosition() {
+        for (int index = 0; index < getSize(); index++) {
+            if (getPlace(index) instanceof Hospital) {
+                return index;
+            }
+        }
+        return 0;
     }
 
     public Place getPlace(int position) {
@@ -26,8 +45,8 @@ public class GameMap {
     }
 
     public void clearTool(int position) {
-        for (int index = 0; index < ROBOT_SETP; index++) {
-            Place place = getPlace((position + index) % getSize());
+        for (int index = position; index < ROBOT_STEP; index++) {
+            Place place = getPlace(index % getSize());
             place.clearToolStatus();
         }
     }

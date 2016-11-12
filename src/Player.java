@@ -8,7 +8,7 @@ public class Player {
     public static final int GOD_DAYS = 5;
     public static final int MAX_TOOLS_NUM = 10;
     public static final int PRISON_DAY = 2;
-    public static final int HOSIPATIL_DAY = 3;
+    public static final int HOSIPITAL_DAY = 3;
     public static final int GIFT_MONEY = 2000;
     public static final int GIFT_POINT = 200;
     private String name;
@@ -20,7 +20,7 @@ public class Player {
     private List<Place> places = new ArrayList<>();
     private int godDays = 0;
     private int prisonDays = 0;
-    private int hosipatilDays = 0;
+    private int hosipitalDays = 0;
     private int point = 0;
     private int barricades = 0;
     private int robots = 0;
@@ -30,7 +30,7 @@ public class Player {
         this.name = name;
         this.dice = dice;
         this.map = map;
-        map.move(position, 0);
+        map.move(this, 0);
     }
 
     public STATUS getStatus() {
@@ -38,7 +38,7 @@ public class Player {
     }
 
     public void roll() {
-        position = map.move(position, dice.roll());
+        position = map.move(this, dice.roll());
         Place place = map.getPlace(position);
         if (place instanceof EmptyLand) {
             Player owner = ((EmptyLand) place).getOwner();
@@ -47,7 +47,7 @@ public class Player {
             } else if (owner == this) {
                 status = STATUS.WAIT_FOR_UPGRADE_COMMAND;
             } else {
-                if (godDays + owner.getPrisonDays() + owner.getHosipatilDays() == 0) {
+                if (godDays + owner.getPrisonDays() + owner.getHosipitalDays() == 0) {
                     payForOthersLand((EmptyLand) place);
                 } else {
                     status = STATUS.TURN_END;
@@ -110,7 +110,7 @@ public class Player {
     }
 
     public void gotoHosipital() {
-        hosipatilDays = HOSIPATIL_DAY;
+        hosipitalDays = HOSIPITAL_DAY;
     }
 
     public int getPoint() {
@@ -121,8 +121,8 @@ public class Player {
         return prisonDays;
     }
 
-    public int getHosipatilDays() {
-        return hosipatilDays;
+    public int getHosipitalDays() {
+        return hosipitalDays;
     }
 
     public void command(String command) {
