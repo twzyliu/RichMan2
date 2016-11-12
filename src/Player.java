@@ -66,6 +66,8 @@ public class Player {
         } else if (place instanceof PrisonLand) {
             gotoPrison();
             status = STATUS.TURN_END;
+        } else if (place instanceof MagicLand) {
+            status = STATUS.TURN_END;
         }
     }
 

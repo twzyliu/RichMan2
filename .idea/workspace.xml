@@ -2,18 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="17d0b991-c8dc-4779-b5b6-5d781c96a132" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/PrisonLand.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/PlayerOnPrisonTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/production/RichMan2/Hospatil.class" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/out/test/RichMan2/PlayerOnHospatilTest.class" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/Hospatil.java" afterPath="$PROJECT_DIR$/src/Hospital.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/test/PlayerOnHospatilTest.java" afterPath="$PROJECT_DIR$/test/PlayerOnHospitalTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/RichMan2/Player$STATUS$1.class" afterPath="$PROJECT_DIR$/out/production/RichMan2/Player$STATUS$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/RichMan2/Player$STATUS$2.class" afterPath="$PROJECT_DIR$/out/production/RichMan2/Player$STATUS$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/RichMan2/Player$STATUS$3.class" afterPath="$PROJECT_DIR$/out/production/RichMan2/Player$STATUS$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/RichMan2/Player$STATUS$4.class" afterPath="$PROJECT_DIR$/out/production/RichMan2/Player$STATUS$4.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/RichMan2/Player$STATUS.class" afterPath="$PROJECT_DIR$/out/production/RichMan2/Player$STATUS.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/RichMan2/Player.class" afterPath="$PROJECT_DIR$/out/production/RichMan2/Player.class" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/MagicLand.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/PlayerOnMagicLandTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Player.java" afterPath="$PROJECT_DIR$/src/Player.java" />
     </list>
@@ -40,23 +30,11 @@
       <file leaf-file-name="Player.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Player.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
-              <caret line="40" column="47" selection-start-line="40" selection-start-column="47" selection-end-line="40" selection-end-column="47" />
+            <state relative-caret-position="444">
+              <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
               <folding>
-                <element signature="e#2938#2939#0" expanded="true" />
-                <element signature="e#2977#2978#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerOnOthersLandTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/PlayerOnOthersLandTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="35" column="80" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="80" />
-              <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#3025#3026#0" expanded="true" />
+                <element signature="e#3064#3065#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -72,15 +50,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EmptyLand.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EmptyLand.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/EmptyLand.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+            <state relative-caret-position="375">
+              <caret line="36" column="20" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
               <folding>
                 <element signature="e#272#273#0" expanded="true" />
                 <element signature="e#306#307#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PlayerOnMagicLandTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/PlayerOnMagicLandTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="344">
+              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MagicLand.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/MagicLand.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="45">
+              <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -98,8 +98,8 @@
       <file leaf-file-name="PlayerOnHospitalTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/PlayerOnHospitalTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="434">
-              <caret line="31" column="67" selection-start-line="30" selection-start-column="8" selection-end-line="31" selection-end-column="67" />
+            <state relative-caret-position="449">
+              <caret line="32" column="5" selection-start-line="13" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -135,18 +135,6 @@
             <state relative-caret-position="45">
               <caret line="3" column="17" selection-start-line="3" selection-start-column="17" selection-end-line="3" selection-end-column="17" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PlayerOnGiftLandTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/PlayerOnGiftLandTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="419">
-              <caret line="61" column="59" selection-start-line="61" selection-start-column="59" selection-end-line="61" selection-end-column="59" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -229,9 +217,11 @@
         <option value="$PROJECT_DIR$/test/PlayerOnHospitalTest.java" />
         <option value="$PROJECT_DIR$/test/PlayerOnEmptyLandTest.java" />
         <option value="$PROJECT_DIR$/src/PrisonLand.java" />
-        <option value="$PROJECT_DIR$/src/Player.java" />
         <option value="$PROJECT_DIR$/test/PlayerOnPrisonTest.java" />
         <option value="$PROJECT_DIR$/src/EmptyLand.java" />
+        <option value="$PROJECT_DIR$/src/MagicLand.java" />
+        <option value="$PROJECT_DIR$/test/PlayerOnMagicLandTest.java" />
+        <option value="$PROJECT_DIR$/src/Player.java" />
       </list>
     </option>
   </component>
@@ -983,17 +973,11 @@
       <updated>1478849195034</updated>
       <workItem from="1478849196327" duration="185000" />
       <workItem from="1478849806849" duration="20371000" />
-      <workItem from="1478934597986" duration="6457000" />
+      <workItem from="1478934597986" duration="6608000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="All_in_RichMan2 - 2016.11.12 at 16h 10m 14s.xml">
-      <configuration name="All in RichMan2" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="All_in_RichMan2 - 2016.11.12 at 16h 10m 31s.xml">
-      <configuration name="All in RichMan2" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="All_in_RichMan2 - 2016.11.12 at 16h 21m 46s.xml">
       <configuration name="All in RichMan2" configurationId="JUnit" />
     </history-entry>
@@ -1018,9 +1002,15 @@
     <history-entry file="All_in_RichMan2 - 2016.11.12 at 17h 21m 08s.xml">
       <configuration name="All in RichMan2" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="All_in_RichMan2 - 2016.11.12 at 17h 26m 25s.xml">
+      <configuration name="All in RichMan2" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="All_in_RichMan2 - 2016.11.12 at 17h 26m 48s.xml">
+      <configuration name="All in RichMan2" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="27013000" />
+    <option name="totallyTimeSpent" value="27164000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -1086,8 +1076,8 @@
         <state relative-caret-position="1755">
           <caret line="148" column="80" selection-start-line="148" selection-start-column="80" selection-end-line="148" selection-end-column="80" />
           <folding>
-            <element signature="e#2938#2939#0" expanded="true" />
-            <element signature="e#2977#2978#0" expanded="true" />
+            <element signature="e#3025#3026#0" expanded="true" />
+            <element signature="e#3064#3065#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1187,8 +1177,8 @@
         <state relative-caret-position="60">
           <caret line="4" column="1" selection-start-line="4" selection-start-column="1" selection-end-line="4" selection-end-column="1" />
           <folding>
-            <element signature="e#2938#2939#0" expanded="true" />
-            <element signature="e#2977#2978#0" expanded="true" />
+            <element signature="e#3025#3026#0" expanded="true" />
+            <element signature="e#3064#3065#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1332,16 +1322,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/PlayerOnHospitalTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="434">
-          <caret line="31" column="67" selection-start-line="30" selection-start-column="8" selection-end-line="31" selection-end-column="67" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/PlayerOnGiftLandTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="419">
@@ -1394,24 +1374,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Player.java">
+    <entry file="file://$PROJECT_DIR$/src/EmptyLand.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="40" column="47" selection-start-line="40" selection-start-column="47" selection-end-line="40" selection-end-column="47" />
+        <state relative-caret-position="375">
+          <caret line="36" column="20" selection-start-line="36" selection-start-column="20" selection-end-line="36" selection-end-column="20" />
           <folding>
-            <element signature="e#2938#2939#0" expanded="true" />
-            <element signature="e#2977#2978#0" expanded="true" />
+            <element signature="e#272#273#0" expanded="true" />
+            <element signature="e#306#307#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/EmptyLand.java">
+    <entry file="file://$PROJECT_DIR$/test/PlayerOnHospitalTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="23" column="11" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="11" />
+        <state relative-caret-position="449">
+          <caret line="32" column="5" selection-start-line="13" selection-start-column="4" selection-end-line="32" selection-end-column="5" />
           <folding>
-            <element signature="e#272#273#0" expanded="true" />
-            <element signature="e#306#307#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/MagicLand.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="39" selection-start-line="3" selection-start-column="39" selection-end-line="3" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Player.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="70" column="0" selection-start-line="70" selection-start-column="0" selection-end-line="70" selection-end-column="0" />
+          <folding>
+            <element signature="e#3025#3026#0" expanded="true" />
+            <element signature="e#3064#3065#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/PlayerOnMagicLandTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
