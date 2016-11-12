@@ -6,6 +6,9 @@ import java.util.List;
  */
 public class Player {
     public static final int GOD_DAYS = 5;
+    public static final String EXIT_BUY_TOOLS = "F";
+    public static final String BARRICADE = "1";
+    public static final int MAX_TOOLS_NUM = 10;
     private String name;
     private STATUS status = STATUS.TURN_START;
     private Dice dice;
@@ -16,6 +19,8 @@ public class Player {
     private int hasGod = 0;
     private int inPrison = 0;
     private int inHosipatil = 0;
+    private int point = 0;
+    private List<Item> items = new ArrayList<>();
 
     public Player(String name, Dice dice, GameMap map) {
         this.name = name;
@@ -43,12 +48,14 @@ public class Player {
                     status = STATUS.TURN_END;
                 }
             }
+        } else if (place instanceof ToolsLand) {
+            status = STATUS.WAIT_FOR_TOOLS_COMMAND;
         }
     }
 
     private void payForOthersLand(Place place) {
         if (money > place.getPrice()) {
-            money -= place.getPrice();
+            money -= place.getBill();
             status = STATUS.TURN_END;
         } else {
             status = STATUS.GAME_OVER;
@@ -83,8 +90,8 @@ public class Player {
         inHosipatil = 3;
     }
 
-    public int getHasGod() {
-        return hasGod;
+    public int getPoint() {
+        return point;
     }
 
     public int getInPrison() {
@@ -93,6 +100,22 @@ public class Player {
 
     public int getInHosipatil() {
         return inHosipatil;
+    }
+
+    public void command(String command) {
+        status.command(this, command);
+    }
+
+    public int getItemsNum() {
+        return items.size();
+    }
+
+    public List<Item> getItems() {
+        return items;
+    }
+
+    public void gainPoint(int point) {
+        this.point += point;
     }
 
     public enum STATUS {
@@ -117,7 +140,21 @@ public class Player {
                     player.money -= place.getPrice();
                 }
             }
-        }, TURN_START, GAME_OVER;
+        }, TURN_START, GAME_OVER, WAIT_FOR_TOOLS_COMMAND {
+            @Override
+            public void command(Player player, String command) {
+                if (command.equals(EXIT_BUY_TOOLS)) {
+                    player.status = STATUS.TURN_END;
+                } else if (command.equals(BARRICADE)) {
+                    if (player.point >= Barricade.POINT & player.getItemsNum()< MAX_TOOLS_NUM) {
+                        player.point -= Barricade.POINT;
+                        player.items.add(new Barricade());
+                    }
+                    player.status = STATUS.WAIT_FOR_TOOLS_COMMAND;
+                }
+            }
+        };
+
 
         public void sayYes(Player player) {
             player.status = STATUS.TURN_END;
@@ -125,6 +162,10 @@ public class Player {
 
         public void sayNo(Player player) {
             player.status = STATUS.TURN_END;
+        }
+
+        public void command(Player player, String command) {
+
         }
     }
 

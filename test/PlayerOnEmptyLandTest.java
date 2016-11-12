@@ -19,19 +19,19 @@ public class PlayerOnEmptyLandTest {
     private Dice dice;
     private GameMap map;
     private EmptyLand emptyLand;
+    private Player player;
 
     @Before
     public void setUp() throws Exception {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
         emptyLand = mock(EmptyLand.class);
+        player = new Player(PLAYER_A, dice, map);
+        when(map.getPlace(anyInt())).thenReturn(emptyLand);
     }
 
     @Test
     public void should_wait_for_input_when_player_walk_to_empty_land() throws Exception {
-        when(map.getPlace(anyInt())).thenReturn(emptyLand);
-
-        Player player = new Player("A", dice, map);
         assertThat(player.getStatus(), is(Player.STATUS.TURN_START));
         player.roll();
         assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_BUY_COMMAND));
@@ -39,9 +39,6 @@ public class PlayerOnEmptyLandTest {
 
     @Test
     public void turn_end_after_say_no() throws Exception {
-        when(map.getPlace(anyInt())).thenReturn(emptyLand);
-
-        Player player = new Player(PLAYER_A, dice, map);
         player.roll();
         player.sayNo();
         assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
@@ -52,7 +49,6 @@ public class PlayerOnEmptyLandTest {
         EmptyLand emptyLand = new EmptyLand(LOWPRICE);
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
 
-        Player player = new Player(PLAYER_A, dice, map);
         player.roll();
         int money = player.getMoney();
         player.sayYes();
@@ -65,10 +61,9 @@ public class PlayerOnEmptyLandTest {
 
     @Test
     public void cannot_buy_land_when_no_enough_money() throws Exception {
+        EmptyLand emptyLand = new EmptyLand(HIGHPRICE);
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
-        when(emptyLand.getPrice()).thenReturn(HIGHPRICE);
 
-        Player player = new Player(PLAYER_A, dice, map);
         player.roll();
         int money = player.getMoney();
         player.sayYes();

@@ -11,4 +11,7 @@ public interface Place {
     void levelUP();
 
     int getLevel();
+
+    int getBill();
+
 }

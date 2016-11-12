@@ -1,3 +1,5 @@
+import static java.lang.Math.pow;
+
 /**
  * Created by zyongliu on 11/11/16.
  */
@@ -19,7 +21,6 @@ public class EmptyLand implements Place {
     @Override
     public void setOwner(Player player) {
         owner = player;
-        level = 1;
     }
 
     @Override
@@ -35,5 +36,10 @@ public class EmptyLand implements Place {
     @Override
     public int getLevel() {
         return level;
+    }
+
+    @Override
+    public int getBill() {
+        return (int)((price / 2) * pow(2, level));
     }
 }

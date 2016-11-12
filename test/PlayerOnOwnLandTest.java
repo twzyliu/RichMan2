@@ -18,6 +18,7 @@ public class PlayerOnOwnLandTest {
     private Dice dice;
     private GameMap map;
     private EmptyLand emptyLand;
+    private Player player;
 
 
     @Before
@@ -25,11 +26,11 @@ public class PlayerOnOwnLandTest {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
         emptyLand = mock(EmptyLand.class);
+        player = new Player(PLAYER_A, dice, map);
     }
 
     @Test
     public void should_wait_for_input_when_player_walk_to_my_own_land() throws Exception {
-        Player player = new Player("A", dice, map);
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
         when(emptyLand.getOwner()).thenReturn(player);
 
@@ -40,7 +41,6 @@ public class PlayerOnOwnLandTest {
 
     @Test
     public void turn_end_after_say_no() throws Exception {
-        Player player = new Player("A", dice, map);
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
         when(emptyLand.getOwner()).thenReturn(player);
 
@@ -55,7 +55,8 @@ public class PlayerOnOwnLandTest {
         EmptyLand emptyLand = new EmptyLand(LOWPRICE);
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
 
-        Player player = new Player(PLAYER_A, dice, map);
+        player.roll();
+        player.sayYes();
         player.roll();
         int money = player.getMoney();
         int level = emptyLand.getLevel();
@@ -71,7 +72,6 @@ public class PlayerOnOwnLandTest {
         EmptyLand emptyLand = new EmptyLand(HIGHPRICE);
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
 
-        Player player = new Player(PLAYER_A, dice, map);
         player.roll();
         int money = player.getMoney();
         int level = emptyLand.getLevel();
@@ -84,10 +84,11 @@ public class PlayerOnOwnLandTest {
 
     @Test
     public void cannot_upgrade_land_when_level_is_max() throws Exception {
-        Player player = new Player(PLAYER_A, dice, map);
         EmptyLand emptyLand = new EmptyLand(LOWPRICE);
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
 
+        player.roll();
+        player.sayYes();
         player.roll();
         player.sayYes();
         player.roll();
