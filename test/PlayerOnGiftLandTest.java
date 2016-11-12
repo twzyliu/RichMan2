@@ -12,7 +12,6 @@ import static org.mockito.Mockito.when;
  */
 public class PlayerOnGiftLandTest {
     private static final String PLAYER_A = "A";
-    public static final int POINT = 1000;
     private Dice dice;
     private GameMap map;
     private Player player;

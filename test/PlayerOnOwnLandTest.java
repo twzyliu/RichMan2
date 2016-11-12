@@ -63,7 +63,7 @@ public class PlayerOnOwnLandTest {
         player.sayYes();
 
         assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
-        assertThat(player.getMoney(), is(money - LOWPRICE));
+        assertThat(player.getMoney(), is(money - emptyLand.getPrice()));
         assertThat(emptyLand.getLevel(), is(level + 1));
     }
 

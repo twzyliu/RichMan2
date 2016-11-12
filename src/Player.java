@@ -38,14 +38,14 @@ public class Player {
         position = map.move(position, dice.roll());
         Place place = map.getPlace(position);
         if (place instanceof EmptyLand) {
-            Player owner = place.getOwner();
+            Player owner = ((EmptyLand) place).getOwner();
             if (owner == null) {
                 status = STATUS.WAIT_FOR_BUY_COMMAND;
             } else if (owner == this) {
                 status = STATUS.WAIT_FOR_UPGRADE_COMMAND;
             } else {
                 if (godDays + owner.getPrisonDays() + owner.getHosipatilDays() == 0) {
-                    payForOthersLand(place);
+                    payForOthersLand((EmptyLand) place);
                 } else {
                     status = STATUS.TURN_END;
                 }
@@ -58,10 +58,13 @@ public class Player {
             }
         } else if (place instanceof GiftLand) {
             status = STATUS.WAIT_FOR_GIFT_COMMAND;
+        } else if (place instanceof MineLand) {
+            point += ((MineLand) place).getPoint();
+            status = STATUS.TURN_END;
         }
     }
 
-    private void payForOthersLand(Place place) {
+    private void payForOthersLand(EmptyLand place) {
         if (money > place.getPrice()) {
             money -= place.getBill();
             status = STATUS.TURN_END;
@@ -139,7 +142,7 @@ public class Player {
             @Override
             public void sayYes(Player player) {
                 player.status = STATUS.TURN_END;
-                Place place = player.map.getPlace(player.position);
+                EmptyLand place = (EmptyLand) player.map.getPlace(player.position);
                 if (player.money >= place.getPrice()) {
                     place.setOwner(player);
                     player.places.add(place);
@@ -150,7 +153,7 @@ public class Player {
             @Override
             public void sayYes(Player player) {
                 player.status = STATUS.TURN_END;
-                Place place = player.map.getPlace(player.position);
+                EmptyLand place = (EmptyLand) player.map.getPlace(player.position);
                 if (player.money >= place.getPrice() & place.getLevel() < EmptyLand.MAXLEVEL) {
                     place.levelUP();
                     player.money -= place.getPrice();

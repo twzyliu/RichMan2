@@ -54,7 +54,7 @@ public class PlayerOnEmptyLandTest {
         player.sayYes();
 
         assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
-        assertThat(player.getMoney(), is(money - LOWPRICE));
+        assertThat(player.getMoney(), is(money - emptyLand.getPrice()));
         assertThat(player.getPlaces().contains(emptyLand), is(true));
         assertThat(emptyLand.getOwner(), is(player));
     }

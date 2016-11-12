@@ -13,32 +13,26 @@ public class EmptyLand implements Place {
         this.price = price;
     }
 
-    @Override
     public int getPrice() {
         return price;
     }
 
-    @Override
     public void setOwner(Player player) {
         owner = player;
     }
 
-    @Override
     public Player getOwner() {
         return owner;
     }
 
-    @Override
     public void levelUP() {
         level += 1;
     }
 
-    @Override
     public int getLevel() {
         return level;
     }
 
-    @Override
     public int getBill() {
         return (int)((price / 2) * pow(2, level));
     }
