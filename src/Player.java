@@ -61,6 +61,8 @@ public class Player {
         } else if (place instanceof MineLand) {
             point += ((MineLand) place).getPoint();
             status = STATUS.TURN_END;
+        } else if (place instanceof Hospatil) {
+            status = STATUS.TURN_END;
         }
     }
 
