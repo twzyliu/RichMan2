@@ -11,7 +11,6 @@ import static org.mockito.Mockito.when;
  * Created by zyongliu on 12/11/16.
  */
 public class PlayerOnMineLandTest {
-    private static final String PLAYER_A = "A";
     public static final int POINT = 20;
     private Dice dice;
     private GameMap map;
@@ -23,7 +22,7 @@ public class PlayerOnMineLandTest {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
         mineLand = mock(MineLand.class);
-        player = new Player(PLAYER_A, dice, map);
+        player = new Player(TestHelper.PLAYER_1, dice, map);
         when(map.getPlace(anyInt())).thenReturn(mineLand);
     }
 

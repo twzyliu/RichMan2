@@ -11,4 +11,9 @@ public class MineLand extends Place{
     public int getPoint() {
         return point;
     }
+
+    @Override
+    public String getStatusSymbol() {
+        return MINELAND_SYMBOL;
+    }
 }

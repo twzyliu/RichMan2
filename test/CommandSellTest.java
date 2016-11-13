@@ -12,7 +12,6 @@ import static org.mockito.Mockito.when;
  * Created by zyongliu on 12/11/16.
  */
 public class CommandSellTest {
-    private static final String PLAYER_A = "A";
     public static final int PRICE = 200;
     public static final int MYLAND = 1;
     public static final int INIT_LEVEL = 0;
@@ -26,7 +25,8 @@ public class CommandSellTest {
         dice = mock(Dice.class);
         gameMap = mock(GameMap.class);
         emptyLand = new EmptyLand(PRICE);
-        player = new Player(PLAYER_A, dice, gameMap);
+        player = new Player(TestHelper.PLAYER_1, dice, gameMap);
+        player.gainMoney(Player.DEFAULT_MONEY);
         when(gameMap.getPlace(anyInt())).thenReturn(emptyLand);
     }
 

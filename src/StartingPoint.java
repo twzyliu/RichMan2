@@ -3,4 +3,8 @@
  */
 public class StartingPoint extends Place {
 
+    @Override
+    public String getStatusSymbol() {
+        return STARTPOINT_SYMBOL;
+    }
 }

@@ -3,4 +3,8 @@
  */
 public class ToolsLand extends Place{
 
+    @Override
+    public String getStatusSymbol() {
+        return TOOLSLAND_SYMBOL;
+    }
 }

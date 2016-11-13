@@ -44,4 +44,9 @@ public class EmptyLand extends Place {
     public void initLevel() {
         level = 0;
     }
+
+    @Override
+    public String getStatusSymbol() {
+        return String.valueOf(level);
+    }
 }

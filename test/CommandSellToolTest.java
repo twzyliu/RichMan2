@@ -9,7 +9,6 @@ import static org.mockito.Mockito.mock;
  * Created by zyongliu on 12/11/16.
  */
 public class CommandSellToolTest {
-    private static final String PLAYER_A = "A";
     private Dice dice;
     private GameMap gameMap;
     private Player player;
@@ -18,7 +17,7 @@ public class CommandSellToolTest {
     public void setUp() throws Exception {
         dice = mock(Dice.class);
         gameMap = mock(GameMap.class);
-        player = new Player(PLAYER_A, dice, gameMap);
+        player = new Player(TestHelper.PLAYER_1, dice, gameMap);
     }
 
     @Test

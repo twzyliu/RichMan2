@@ -13,7 +13,6 @@ import static org.mockito.Mockito.when;
  */
 public class PlayerOnEmptyLandTest {
 
-    private static final String PLAYER_A = "A";
     private static final int LOWPRICE = 200;
     private static final int HIGHPRICE = 200000;
     private Dice dice;
@@ -26,7 +25,8 @@ public class PlayerOnEmptyLandTest {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
         emptyLand = mock(EmptyLand.class);
-        player = new Player(PLAYER_A, dice, map);
+        player = new Player(TestHelper.PLAYER_1, dice, map);
+        player.gainMoney(Player.DEFAULT_MONEY);
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
     }
 

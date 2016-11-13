@@ -3,4 +3,8 @@
  */
 public class GiftLand extends Place{
 
+    @Override
+    public String getStatusSymbol() {
+        return GIFTLAND_SYMBOL;
+    }
 }

@@ -11,7 +11,6 @@ import static org.mockito.Mockito.when;
  */
 public class GameMapTest {
 
-    private static final String PLAYER_A = "A";
     public static final int PRICE = 200;
     public static final int STEP = 1;
     private GameMap gameMap;
@@ -35,7 +34,7 @@ public class GameMapTest {
     public void should_stop_when_player_encounter_barricade() throws Exception {
         Dice dice = mock(Dice.class);
         when(dice.roll()).thenReturn(STEP + 1);
-        Player player = new Player(PLAYER_A, dice, gameMap);
+        Player player = new Player(TestHelper.PLAYER_1, dice, gameMap);
         int position = player.getPosition();
         player.gainBarricade();
         player.block(STEP);
@@ -48,7 +47,7 @@ public class GameMapTest {
     public void should_goto_hosipital_when_player_encounter_bomb() throws Exception {
         Dice dice = mock(Dice.class);
         when(dice.roll()).thenReturn(STEP);
-        Player player = new Player(PLAYER_A, dice, gameMap);
+        Player player = new Player(TestHelper.PLAYER_1, dice, gameMap);
         player.gainBomb();
         player.bomb(STEP);
         player.roll();

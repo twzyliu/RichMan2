@@ -3,4 +3,8 @@
  */
 public class Hospital extends Place {
 
+    @Override
+    public String getStatusSymbol() {
+        return HOSIPITAL_SYMBOL;
+    }
 }

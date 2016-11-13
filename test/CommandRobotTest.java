@@ -9,7 +9,6 @@ import static org.mockito.Mockito.mock;
  * Created by zyongliu on 12/11/16.
  */
 public class CommandRobotTest {
-    private static final String PLAYER_A = "A";
     private static final int PRICE = 200;
     private static final int STEP = 1;
     private Dice dice;
@@ -22,7 +21,7 @@ public class CommandRobotTest {
         dice = mock(Dice.class);
         emptyLand = new EmptyLand(PRICE);
         gameMap = new GameMap(new StartingPoint(), emptyLand);
-        player = new Player(PLAYER_A, dice, gameMap);
+        player = new Player(TestHelper.PLAYER_1, dice, gameMap);
     }
 
     @Test
