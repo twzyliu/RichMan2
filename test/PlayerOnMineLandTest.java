@@ -11,7 +11,6 @@ import static org.mockito.Mockito.when;
  * Created by zyongliu on 12/11/16.
  */
 public class PlayerOnMineLandTest {
-    public static final int POINT = 20;
     private Dice dice;
     private GameMap map;
     private Player player;
@@ -28,7 +27,7 @@ public class PlayerOnMineLandTest {
 
     @Test
     public void should_get_point_when_on_mineland() throws Exception {
-        when(mineLand.getPoint()).thenReturn(POINT);
+        when(mineLand.getPoint()).thenReturn(TestHelper.POINT);
 
         int point = player.getPoint();
         player.roll();

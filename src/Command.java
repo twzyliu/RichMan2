@@ -9,4 +9,6 @@ public interface Command {
     String GIFT_MONEY = "1";
     String GIFT_POINT = "2";
     String GIFT_GOD = "3";
+    String YES = "y";
+    String NO = "n";
 }

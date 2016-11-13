@@ -9,10 +9,6 @@ import static org.mockito.Mockito.mock;
  * Created by zyongliu on 12/11/16.
  */
 public class CommandBombTest {
-    public static final int STEP = 1;
-    private static final int FAR_STEP = 15;
-    public static final int PRICE = 200;
-    public static final int SELF_POSITION = 0;
     private Dice dice;
     private EmptyLand emptyLand;
     private GameMap gameMap;
@@ -21,7 +17,7 @@ public class CommandBombTest {
     @Before
     public void setUp() throws Exception {
         dice = mock(Dice.class);
-        emptyLand = new EmptyLand(PRICE);
+        emptyLand = new EmptyLand(TestHelper.PRICE);
         gameMap = new GameMap(new StartingPoint(), emptyLand);
         player = new Player(TestHelper.PLAYER_1, dice, gameMap);
     }
@@ -30,7 +26,7 @@ public class CommandBombTest {
     public void cannot_use_bomb_when_no_enough_bombs() throws Exception {
         int itemsNum = player.getToolsNum();
 
-        assertThat(player.bomb(STEP), is(false));
+        assertThat(player.bomb(TestHelper.STEP), is(false));
         assertThat(player.getToolsNum(), is(itemsNum));
         assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
@@ -40,7 +36,7 @@ public class CommandBombTest {
         player.gainBomb();
         int itemsNum = player.getToolsNum();
 
-        assertThat(player.bomb(FAR_STEP), is(false));
+        assertThat(player.bomb(TestHelper.FAR_STEP), is(false));
         assertThat(player.getToolsNum(), is(itemsNum));
         assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
@@ -49,10 +45,10 @@ public class CommandBombTest {
     public void cannot_use_bomb_when_item_on_target() throws Exception {
         player.gainBomb();
         player.gainBomb();
-        player.bomb(STEP);
+        player.bomb(TestHelper.STEP);
         int itemsNum = player.getToolsNum();
 
-        assertThat(player.bomb(STEP), is(false));
+        assertThat(player.bomb(TestHelper.STEP), is(false));
         assertThat(player.getToolsNum(), is(itemsNum));
         assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
@@ -61,7 +57,7 @@ public class CommandBombTest {
     public void cannot_use_bomb_when_player_on_target() throws Exception {
         player.gainBomb();
 
-        assertThat(player.bomb(SELF_POSITION), is(false));
+        assertThat(player.bomb(TestHelper.SELF_POSITION), is(false));
         assertThat(player.getToolsNum(), is(player.getToolsNum()));
         assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
@@ -71,9 +67,9 @@ public class CommandBombTest {
         player.gainBomb();
         int itemsNum = player.getToolsNum();
 
-        assertThat(player.bomb(STEP), is(true));
+        assertThat(player.bomb(TestHelper.STEP), is(true));
         assertThat(player.getToolsNum(), is(itemsNum - 1));
-        assertThat(gameMap.getPlace(player.getPosition() + STEP).getStatus(), is(Place.BOMB));
+        assertThat(gameMap.getPlace(player.getPosition() + TestHelper.STEP).getStatus(), is(Place.BOMB));
         assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
 }

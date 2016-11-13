@@ -10,13 +10,6 @@ public class Place {
     public static final int BARRICADE = 2;
     public static final int BOMB = 3;
     public static final String PLAYER_SYMBOL = "!";
-    public static final String GIFTLAND_SYMBOL = "G";
-    public static final String HOSIPITAL_SYMBOL = "H";
-    public static final String MAGICLAND_SYMBOL = "M";
-    public static final String MINELAND_SYMBOL = "$";
-    public static final String PRISON_SYMBOL = "P";
-    public static final String STARTPOINT_SYMBOL = "S";
-    public static final String TOOLSLAND_SYMBOL = "T";
     private int status = 0;
     private List<String> playerSymbol = new ArrayList<>();
 

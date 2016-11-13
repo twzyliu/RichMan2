@@ -3,6 +3,8 @@
  */
 public class MagicLand extends Place{
 
+    private static final String MAGICLAND_SYMBOL = "M";
+
     @Override
     public String getStatusSymbol() {
         return MAGICLAND_SYMBOL;

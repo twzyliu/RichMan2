@@ -2,22 +2,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.System.out;
-import static java.util.Arrays.asList;
 
 /**
  * Created by zyongliu on 11/11/16.
  */
 public class Player {
     public static final int GOD_DAYS = 5;
-    public static final int MAX_TOOLS_NUM = 10;
     public static final int PRISON_DAY = 2;
     public static final int HOSIPITAL_DAY = 3;
+    public static final int MAX_TOOLS_NUM = 10;
     public static final int GIFT_MONEY = 2000;
     public static final int GIFT_POINT = 200;
-    public static final List<List<String>> playersName = new ArrayList<>(
-            asList(asList("1.钱夫人(Q)", "Q", "钱夫人Q"), asList("2.阿土伯(A)", "A", "阿土伯A"), asList("3.孙小美(S)", "S", "孙小美S"), asList("4.金贝贝(J)", "J", "金贝贝J"))
-    );
-    public static final int DEFAULT_MONEY = 10000;
     private STATUS status = STATUS.TURN_START;
     private Dice dice;
     private GameMap map;
@@ -359,11 +354,11 @@ public class Player {
     }
 
     public static String getPlayerName(Integer playerNum) {
-        return playersName.get(playerNum - 1).get(0);
+        return Game.playersName.get(playerNum - 1).get(0);
     }
 
     public String getName() {
-        return playersName.get(playerNum - 1).get(2);
+        return Game.playersName.get(playerNum - 1).get(2);
     }
 
     public void setStatus(STATUS status) {
@@ -371,7 +366,7 @@ public class Player {
     }
 
     public String getSymbol() {
-        return playersName.get(playerNum - 1).get(1);
+        return Game.playersName.get(playerNum - 1).get(1);
     }
 
     public void updateDays() {

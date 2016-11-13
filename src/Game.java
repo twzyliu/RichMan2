@@ -15,8 +15,10 @@ public class Game {
     public static final String WRONG_COMMAND = "指令错误! 输入help可以查询指令 " + INPUT_AGAIN;
     public static final String ILLEGAL_NUMBER = "非法数字!\n" + INPUT_AGAIN;
     public static final int GAMEMAP_SIZE = 70;
-    public static final String YES = "y";
-    public static final String NO = "n";
+    public static final int DEFAULT_MONEY = 10000;
+    public static final List<List<String>> playersName = new ArrayList<>(
+            asList(asList("1.钱夫人(Q)", "Q", "钱夫人Q"), asList("2.阿土伯(A)", "A", "阿土伯A"), asList("3.孙小美(S)", "S", "孙小美S"), asList("4.金贝贝(J)", "J", "金贝贝J"))
+    );
     private Scanner input = new Scanner(System.in);
     private String command = "";
     private List<Player> players = new ArrayList<>();
@@ -124,10 +126,10 @@ public class Game {
         boolean finish = false;
         while (!finish) {
             getInput();
-            if (command.equals(YES)) {
+            if (command.equals(Command.YES)) {
                 player.sayYes();
                 finish = true;
-            } else if (command.equals(NO)) {
+            } else if (command.equals(Command.NO)) {
                 player.sayNo();
                 finish = true;
             } else {
@@ -231,7 +233,7 @@ public class Game {
         while (initFund == 0) {
             getInput();
             if (command.equals("n")) {
-                initFund = Player.DEFAULT_MONEY;
+                initFund = DEFAULT_MONEY;
                 break;
             }
             initFund = checkInputMoney(command);

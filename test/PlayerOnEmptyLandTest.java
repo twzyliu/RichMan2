@@ -13,8 +13,6 @@ import static org.mockito.Mockito.when;
  */
 public class PlayerOnEmptyLandTest {
 
-    private static final int LOWPRICE = 200;
-    private static final int HIGHPRICE = 200000;
     private Dice dice;
     private GameMap map;
     private EmptyLand emptyLand;
@@ -26,7 +24,7 @@ public class PlayerOnEmptyLandTest {
         map = mock(GameMap.class);
         emptyLand = mock(EmptyLand.class);
         player = new Player(TestHelper.PLAYER_1, dice, map);
-        player.gainMoney(Player.DEFAULT_MONEY);
+        player.gainMoney(Game.DEFAULT_MONEY);
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
     }
 
@@ -46,7 +44,7 @@ public class PlayerOnEmptyLandTest {
 
     @Test
     public void can_buy_land_when_have_enough_money() throws Exception {
-        EmptyLand emptyLand = new EmptyLand(LOWPRICE);
+        EmptyLand emptyLand = new EmptyLand(TestHelper.LOWPRICE);
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
 
         player.roll();
@@ -61,7 +59,7 @@ public class PlayerOnEmptyLandTest {
 
     @Test
     public void cannot_buy_land_when_no_enough_money() throws Exception {
-        EmptyLand emptyLand = new EmptyLand(HIGHPRICE);
+        EmptyLand emptyLand = new EmptyLand(TestHelper.HIGHPRICE);
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
 
         player.roll();

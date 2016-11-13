@@ -11,14 +11,12 @@ import static org.mockito.Mockito.when;
  */
 public class GameMapTest {
 
-    public static final int PRICE = 200;
-    public static final int STEP = 1;
     private GameMap gameMap;
     private Hospital hospital;
 
     @Before
     public void setUp() throws Exception {
-        EmptyLand emptyLand = new EmptyLand(PRICE);
+        EmptyLand emptyLand = new EmptyLand(TestHelper.PRICE);
         hospital = new Hospital();
         gameMap = new GameMap(new StartingPoint(), emptyLand, hospital);
     }
@@ -33,23 +31,23 @@ public class GameMapTest {
     @Test
     public void should_stop_when_player_encounter_barricade() throws Exception {
         Dice dice = mock(Dice.class);
-        when(dice.roll()).thenReturn(STEP + 1);
+        when(dice.roll()).thenReturn(TestHelper.STEP + 1);
         Player player = new Player(TestHelper.PLAYER_1, dice, gameMap);
         int position = player.getPosition();
         player.gainBarricade();
-        player.block(STEP);
+        player.block(TestHelper.STEP);
         player.roll();
 
-        assertThat(player.getPosition(), is(position + STEP));
+        assertThat(player.getPosition(), is(position + TestHelper.STEP));
     }
 
     @Test
     public void should_goto_hosipital_when_player_encounter_bomb() throws Exception {
         Dice dice = mock(Dice.class);
-        when(dice.roll()).thenReturn(STEP);
+        when(dice.roll()).thenReturn(TestHelper.STEP);
         Player player = new Player(TestHelper.PLAYER_1, dice, gameMap);
         player.gainBomb();
-        player.bomb(STEP);
+        player.bomb(TestHelper.STEP);
         player.roll();
 
         assertThat(player.getPosition(), is(gameMap.getHosipitalPosition()));

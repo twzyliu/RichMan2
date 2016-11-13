@@ -3,6 +3,7 @@
  */
 public class Items {
     public static final int CHEAPEST = 30;
+    public static final int ROBOT_STEP = 10;
     private static final String BARRICADE_SYMBOL = "#";
     private static final String BOMB_SYMBOL = "@";
     private static final int BARRICADE_POINT = 50;

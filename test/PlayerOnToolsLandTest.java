@@ -11,7 +11,6 @@ import static org.mockito.Mockito.when;
  * Created by zyongliu on 12/11/16.
  */
 public class PlayerOnToolsLandTest {
-    public static final int POINT = 1000;
     private Dice dice;
     private GameMap map;
     private Player player;
@@ -29,7 +28,7 @@ public class PlayerOnToolsLandTest {
     @Test
     public void should_wait_for_input_when_player_walk_to_tools_land() throws Exception {
         assertThat(player.getStatus(), is(STATUS.TURN_START));
-        player.gainPoint(POINT);
+        player.gainPoint(TestHelper.MOREPOINT);
         player.roll();
         assertThat(player.getStatus(), is(STATUS.WAIT_FOR_TOOLS_COMMAND));
     }
@@ -37,7 +36,7 @@ public class PlayerOnToolsLandTest {
     @Test
     public void turn_end_after_chose_command_F() throws Exception {
         assertThat(player.getStatus(), is(STATUS.TURN_START));
-        player.gainPoint(POINT);
+        player.gainPoint(TestHelper.MOREPOINT);
         player.roll();
         player.command(Command.TOOLS_EXIT);
         assertThat(player.getStatus(), is(STATUS.TURN_END));
@@ -45,7 +44,7 @@ public class PlayerOnToolsLandTest {
 
     @Test
     public void can_buy_tools_when_have_enough_point_and_space() throws Exception {
-        player.gainPoint(POINT);
+        player.gainPoint(TestHelper.MOREPOINT);
         player.roll();
         int point = player.getPoint();
         int itemNum = player.getToolsNum();
@@ -71,7 +70,7 @@ public class PlayerOnToolsLandTest {
 
     @Test
     public void cannot_buy_tools_when_no_enough_space() throws Exception {
-        player.gainPoint(POINT);
+        player.gainPoint(TestHelper.MOREPOINT);
         player.roll();
         for (int inxex = 0; inxex < Player.MAX_TOOLS_NUM; inxex++) {
             player.command(Command.TOOLS_BARRICADE);

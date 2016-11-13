@@ -3,6 +3,8 @@
  */
 public class Prison extends Place{
 
+    private static final String PRISON_SYMBOL = "P";
+
     @Override
     public String getStatusSymbol() {
         return PRISON_SYMBOL;

@@ -26,8 +26,8 @@ public class PlayerOnOwnLandTest {
         map = mock(GameMap.class);
         emptyLand = mock(EmptyLand.class);
         player = new Player(TestHelper.PLAYER_1, dice, map);
-        player.gainMoney(Player.DEFAULT_MONEY);
-        player.gainMoney(Player.DEFAULT_MONEY);
+        player.gainMoney(Game.DEFAULT_MONEY);
+        player.gainMoney(Game.DEFAULT_MONEY);
     }
 
     @Test

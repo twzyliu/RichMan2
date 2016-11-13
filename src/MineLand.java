@@ -1,7 +1,8 @@
 /**
  * Created by zyongliu on 12/11/16.
  */
-public class MineLand extends Place{
+public class MineLand extends Place {
+    private static final String MINELAND_SYMBOL = "$";
     private int point;
 
     public MineLand(int point) {

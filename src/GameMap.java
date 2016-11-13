@@ -9,8 +9,6 @@ import static java.util.Arrays.asList;
  * Created by zyongliu on 11/11/16.
  */
 public class GameMap {
-
-    public static final int ROBOT_STEP = 10;
     private List<Place> places = new ArrayList<>();
 
     public GameMap(Place... gameMaps) {
@@ -79,7 +77,7 @@ public class GameMap {
     }
 
     public void robotsTool(int position) {
-        for (int index = position + 1; index < position + 1 + ROBOT_STEP; index++) {
+        for (int index = position + 1; index < position + 1 + Items.ROBOT_STEP; index++) {
             Place place = getPlace(index % getSize());
             place.clearToolStatus();
         }
