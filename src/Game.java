@@ -25,8 +25,8 @@ public class Game {
     private GameMap gameMap;
     private Player winner = null;
     private int round = 1;
-    private List<Item> items = new ArrayList<>(
-            asList(new Barricade(), new Robot(), new Bomb())
+    private List<Items> items = new ArrayList<>(
+            asList(Items.Barricade, Items.Robot, Items.Bomb)
     );
 
 
@@ -85,11 +85,11 @@ public class Game {
                 if (command.equals(Command.TOOLS_EXIT)) {
                     break;
                 } else if (command.equals(Command.TOOLS_BARRICADE)) {
-                    player.buyTool(new Barricade());
+                    player.buyTool(Items.Barricade);
                 } else if (command.equals(Command.TOOLS_ROBOT)) {
-                    player.buyTool(new Robot());
+                    player.buyTool(Items.Robot);
                 } else if (command.equals(Command.TOOLS_BOMB)) {
-                    player.buyTool(new Bomb());
+                    player.buyTool(Items.Bomb);
                 }
                 query(player);
                 out.print("按F键退出\n");

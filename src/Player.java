@@ -72,7 +72,7 @@ public class Player {
                 }
             }
         } else if (place instanceof ToolsLand) {
-            if (point >= Item.CHEAPEST) {
+            if (point >= Items.CHEAPEST) {
                 status = STATUS.WAIT_FOR_TOOLS_COMMAND;
             } else {
                 out.print("欢迎来到道具屋,但是你的点数不够,拜拜~\n");
@@ -269,23 +269,23 @@ public class Player {
         }
     }
 
-    public boolean sellTool(Item item) {
+    public boolean sellTool(Items item) {
         status = STATUS.WAIT_FOR_COMMAND;
-        if (item instanceof Barricade) {
+        if (item.equals(Items.Barricade)) {
             if (barricades > 0) {
                 point += item.getPoint();
                 barricades -= 1;
                 out.print("成功卖出路障!\n");
                 return true;
             }
-        } else if (item instanceof Robot) {
+        } else if (item.equals(Items.Robot)) {
             if (robots > 0) {
                 point += item.getPoint();
                 robots -= 1;
                 out.print("成功卖出机器娃娃!\n");
                 return true;
             }
-        } else if (item instanceof Bomb) {
+        } else if (item.equals(Items.Bomb)) {
             if (bombs > 0) {
                 point += item.getPoint();
                 bombs -= 1;
@@ -297,17 +297,17 @@ public class Player {
         return false;
     }
 
-    public boolean buyTool(Item item) {
+    public boolean buyTool(Items item) {
         status = STATUS.WAIT_FOR_COMMAND;
         int itemPoint = item.getPoint();
         if (getToolsNum() < 10 & point >= itemPoint) {
-            if (item instanceof Barricade) {
+            if (item.equals(Items.Barricade)) {
                 barricades += 1;
                 out.print("恭喜购买路障成功!\n");
-            } else if (item instanceof Robot) {
+            } else if (item.equals(Items.Robot)) {
                 robots += 1;
                 out.print("恭喜购买机器娃娃成功!\n");
-            } else if (item instanceof Bomb) {
+            } else if (item.equals(Items.Bomb)) {
                 bombs += 1;
                 out.print("恭喜购买炸弹成功!\n");
             }
@@ -423,19 +423,19 @@ public class Player {
                 if (command.equals(Command.TOOLS_EXIT)) {
                     player.status = STATUS.TURN_END;
                 } else if (command.equals(Command.TOOLS_BARRICADE)) {
-                    if (player.point >= Item.BARRICADE_POINT & player.getToolsNum() < MAX_TOOLS_NUM) {
-                        player.point -= Item.BARRICADE_POINT;
+                    if (player.point >= Items.Barricade.getPoint() & player.getToolsNum() < MAX_TOOLS_NUM) {
+                        player.point -= Items.Barricade.getPoint();
                         player.gainBarricade();
                     }
                     player.status = STATUS.WAIT_FOR_TOOLS_COMMAND;
                 } else if (command.equals(Command.TOOLS_ROBOT)) {
-                    if (player.point >= Item.ROBOT_POINT & player.getToolsNum() < MAX_TOOLS_NUM) {
-                        player.point -= Item.ROBOT_POINT;
+                    if (player.point >= Items.Robot.getPoint() & player.getToolsNum() < MAX_TOOLS_NUM) {
+                        player.point -= Items.Robot.getPoint();
                         player.gainRobot();
                     }
                 } else if (command.equals(Command.TOOLS_BOMB)) {
-                    if (player.point >= Item.BOMB_POINT & player.getToolsNum() < MAX_TOOLS_NUM) {
-                        player.point -= Item.BOMB_POINT;
+                    if (player.point >= Items.Bomb.getPoint() & player.getToolsNum() < MAX_TOOLS_NUM) {
+                        player.point -= Items.Bomb.getPoint();
                         player.gainBomb();
                     }
                 }

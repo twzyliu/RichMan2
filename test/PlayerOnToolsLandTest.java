@@ -51,7 +51,7 @@ public class PlayerOnToolsLandTest {
         int itemNum = player.getToolsNum();
         player.command(Command.TOOLS_BARRICADE);
 
-        assertThat(player.getPoint(), is(point - Item.BARRICADE_POINT));
+        assertThat(player.getPoint(), is(point - Items.Barricade.getPoint()));
         assertThat(player.getToolsNum(), is(itemNum + 1));
         assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_TOOLS_COMMAND));
     }
@@ -88,7 +88,7 @@ public class PlayerOnToolsLandTest {
     @Test
     public void auto_end_turn_when_no_enough_point_to_buy_anyone() throws Exception {
         player.roll();
-        assertThat(player.getPoint() < Item.CHEAPEST, is(true));
+        assertThat(player.getPoint() < Items.CHEAPEST, is(true));
         assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
     }
 }

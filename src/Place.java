@@ -44,9 +44,9 @@ public class Place {
         if (status == PLAYER) {
             return PLAYER_SYMBOL;
         } else if (status == BARRICADE) {
-            return Barricade.BARRICADE_SYMBOL;
+            return Items.Barricade.getSymbol();
         } else if (status == BOMB) {
-            return Bomb.BOMB_SYMBOL;
+            return Items.Bomb.getSymbol();
         } else {
             return getStatusSymbol();
         }
