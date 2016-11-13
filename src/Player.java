@@ -164,7 +164,7 @@ public class Player {
     }
 
     public void command(String command) {
-        status.command(this, command);
+        getStatus().command(this, command);
     }
 
     public int getToolsNum() {
@@ -402,70 +402,6 @@ public class Player {
             return true;
         }
         return false;
-    }
-
-    public enum STATUS {
-        TURN_END, WAIT_FOR_BUY_COMMAND {
-            @Override
-            public void sayYes(Player player) {
-                player.status = STATUS.TURN_END;
-                player.buyLand();
-            }
-        }, WAIT_FOR_UPGRADE_COMMAND {
-            @Override
-            public void sayYes(Player player) {
-                player.status = STATUS.TURN_END;
-                player.upgradeLand();
-            }
-        }, TURN_START, GAME_OVER, WAIT_FOR_TOOLS_COMMAND {
-            @Override
-            public void command(Player player, String command) {
-                if (command.equals(Command.TOOLS_EXIT)) {
-                    player.status = STATUS.TURN_END;
-                } else if (command.equals(Command.TOOLS_BARRICADE)) {
-                    if (player.point >= Items.Barricade.getPoint() & player.getToolsNum() < MAX_TOOLS_NUM) {
-                        player.point -= Items.Barricade.getPoint();
-                        player.gainBarricade();
-                    }
-                    player.status = STATUS.WAIT_FOR_TOOLS_COMMAND;
-                } else if (command.equals(Command.TOOLS_ROBOT)) {
-                    if (player.point >= Items.Robot.getPoint() & player.getToolsNum() < MAX_TOOLS_NUM) {
-                        player.point -= Items.Robot.getPoint();
-                        player.gainRobot();
-                    }
-                } else if (command.equals(Command.TOOLS_BOMB)) {
-                    if (player.point >= Items.Bomb.getPoint() & player.getToolsNum() < MAX_TOOLS_NUM) {
-                        player.point -= Items.Bomb.getPoint();
-                        player.gainBomb();
-                    }
-                }
-            }
-        }, WAIT_FOR_GIFT_COMMAND {
-            @Override
-            public void command(Player player, String command) {
-                if (command.equals(Command.GIFT_MONEY)) {
-                    player.gainMoney(GIFT_MONEY);
-                    player.status = STATUS.TURN_END;
-                } else if (command.equals(Command.GIFT_POINT)) {
-                    player.gainPoint(GIFT_POINT);
-                } else if (command.equals(Command.GIFT_GOD)) {
-                    player.gainGod();
-                }
-                player.status = STATUS.TURN_END;
-            }
-        }, WAIT_FOR_COMMAND;
-
-        public void sayYes(Player player) {
-            player.status = STATUS.TURN_END;
-        }
-
-        public void sayNo(Player player) {
-            player.status = STATUS.TURN_END;
-        }
-
-        public void command(Player player, String command) {
-
-        }
     }
 
 

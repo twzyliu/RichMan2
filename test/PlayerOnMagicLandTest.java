@@ -28,7 +28,7 @@ public class PlayerOnMagicLandTest {
     @Test
     public void should_end_turn_when_on_magicland() throws Exception {
         player.roll();
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
     }
 
 }

@@ -23,7 +23,7 @@ public class CommandSellToolTest {
     @Test
     public void cannot_sell_tool_when_not_have_tools() throws Exception {
         assertThat(player.sellTool(Items.Barricade), is(false));
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
 
     @Test
@@ -35,6 +35,6 @@ public class CommandSellToolTest {
         assertThat(player.sellTool(Items.Barricade), is(true));
         assertThat(player.getPoint(), is(point+ Items.Barricade.getPoint()));
         assertThat(player.getToolsNum(), is(toolsNum - 1));
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
 }

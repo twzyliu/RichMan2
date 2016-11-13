@@ -27,9 +27,9 @@ public class PlayerOnGiftLandTest {
 
     @Test
     public void should_wait_for_input_when_player_walk_to_gift_land() throws Exception {
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_START));
+        assertThat(player.getStatus(), is(STATUS.TURN_START));
         player.roll();
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_GIFT_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_GIFT_COMMAND));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class PlayerOnGiftLandTest {
         player.command(Command.GIFT_MONEY);
 
         assertThat(player.getMoney(), is(money + Player.GIFT_MONEY));
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class PlayerOnGiftLandTest {
         player.command(Command.GIFT_POINT);
 
         assertThat(player.getPoint(), is(point + Player.GIFT_POINT));
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
     }
 
     @Test
@@ -59,6 +59,6 @@ public class PlayerOnGiftLandTest {
         player.command(Command.GIFT_GOD);
 
         assertThat(player.getGodDays(), is(godDays + Player.GOD_DAYS));
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
     }
 }

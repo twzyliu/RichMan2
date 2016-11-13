@@ -35,9 +35,9 @@ public class PlayerOnOwnLandTest {
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
         when(emptyLand.getOwner()).thenReturn(player);
 
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_START));
+        assertThat(player.getStatus(), is(STATUS.TURN_START));
         player.roll();
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_UPGRADE_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_UPGRADE_COMMAND));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class PlayerOnOwnLandTest {
         player.roll();
         player.sayNo();
 
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
     }
 
     @Test
@@ -63,7 +63,7 @@ public class PlayerOnOwnLandTest {
         int level = emptyLand.getLevel();
         player.sayYes();
 
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
         assertThat(player.getMoney(), is(money - emptyLand.getPrice()));
         assertThat(emptyLand.getLevel(), is(level + 1));
     }
@@ -78,7 +78,7 @@ public class PlayerOnOwnLandTest {
         int level = emptyLand.getLevel();
         player.sayYes();
 
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
         assertThat(player.getMoney(), is(money));
         assertThat(emptyLand.getLevel(), is(level));
     }
@@ -100,7 +100,7 @@ public class PlayerOnOwnLandTest {
         int money = player.getMoney();
         player.sayYes();
 
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
         assertThat(emptyLand.getLevel(), is(EmptyLand.MAXLEVEL));
         assertThat(player.getMoney(), is(money));
     }

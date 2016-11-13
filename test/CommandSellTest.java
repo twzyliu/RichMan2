@@ -33,7 +33,7 @@ public class CommandSellTest {
     @Test
     public void cannot_sell_land_when_not_have_land() throws Exception {
         assertThat(player.sell(MYLAND), is(false));
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
 
     @Test
@@ -47,6 +47,6 @@ public class CommandSellTest {
         assertThat(emptyLand.getLevel(), is(INIT_LEVEL));
         assertNull(emptyLand.getOwner());
         assertThat(player.getPlaces().size(), is(placeNum - 1));
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
 }

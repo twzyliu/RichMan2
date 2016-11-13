@@ -38,16 +38,16 @@ public class Game {
         while (winner == null) {
             out.print("第" + round + "回合开始!\n");
             for (Player player : players) {
-                player.setStatus(Player.STATUS.TURN_START);
+                player.setStatus(STATUS.TURN_START);
                 gameMap.printMap();
                 if (!player.checkDays()) {
-                    while (player.getStatus() != Player.STATUS.TURN_END & player.getStatus() != Player.STATUS.GAME_OVER) {
+                    while (player.getStatus() != STATUS.TURN_END & player.getStatus() != STATUS.GAME_OVER) {
                         selectCommand(player);
                         checkPlayerStatus(player);
                     }
                 }
                 player.updateDays();
-                if (player.getStatus() == Player.STATUS.GAME_OVER) {
+                if (player.getStatus() == STATUS.GAME_OVER) {
                     players.remove(player);
                     out.printf("%s 你破产了!哈哈哈!\n胜败乃兵家常事,大侠请重新来过!\n", player.getName());
                 }
@@ -66,14 +66,14 @@ public class Game {
     }
 
     private void checkPlayerStatus(Player player) {
-        Player.STATUS status = player.getStatus();
-        if (status.equals(Player.STATUS.WAIT_FOR_BUY_COMMAND)) {
+        STATUS status = player.getStatus();
+        if (status.equals(STATUS.WAIT_FOR_BUY_COMMAND)) {
             gameMap.printMap();
             buyAndUpgradeActioin(player, "是否购买该处空地，%s元（Y/N）?\n");
-        } else if (status.equals(Player.STATUS.WAIT_FOR_UPGRADE_COMMAND)) {
+        } else if (status.equals(STATUS.WAIT_FOR_UPGRADE_COMMAND)) {
             gameMap.printMap();
             buyAndUpgradeActioin(player, "是否升级该处地产，%s元（Y/N）?\n");
-        } else if (status.equals(Player.STATUS.WAIT_FOR_TOOLS_COMMAND)) {
+        } else if (status.equals(STATUS.WAIT_FOR_TOOLS_COMMAND)) {
             out.printf("欢迎光临道具屋， 请选择您所需要的道具：\n" +
                     " 道 具     编号     价值（点数）     显示方式\n" +
                     " 路 障\t1\t50\t＃\n" +
@@ -94,8 +94,8 @@ public class Game {
                 query(player);
                 out.print("按F键退出\n");
             }
-        } else if (status.equals(Player.STATUS.WAIT_FOR_GIFT_COMMAND)) {
-            player.setStatus(Player.STATUS.TURN_END);
+        } else if (status.equals(STATUS.WAIT_FOR_GIFT_COMMAND)) {
+            player.setStatus(STATUS.TURN_END);
             out.printf("欢迎光临礼品屋，请选择一件您 喜欢的礼品：\n" +
                     "礼品    编号\n" +
                     "奖 金    1\n" +

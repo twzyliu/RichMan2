@@ -29,6 +29,6 @@ public class PlayerOnPrisonTest {
     public void should_stay_two_days_when_on_prison() throws Exception {
         player.roll();
         assertThat(player.getPrisonDays(), is(Player.PRISON_DAY));
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
     }
 }

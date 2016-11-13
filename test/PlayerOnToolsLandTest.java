@@ -28,19 +28,19 @@ public class PlayerOnToolsLandTest {
 
     @Test
     public void should_wait_for_input_when_player_walk_to_tools_land() throws Exception {
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_START));
+        assertThat(player.getStatus(), is(STATUS.TURN_START));
         player.gainPoint(POINT);
         player.roll();
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_TOOLS_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_TOOLS_COMMAND));
     }
 
     @Test
     public void turn_end_after_chose_command_F() throws Exception {
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_START));
+        assertThat(player.getStatus(), is(STATUS.TURN_START));
         player.gainPoint(POINT);
         player.roll();
         player.command(Command.TOOLS_EXIT);
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class PlayerOnToolsLandTest {
 
         assertThat(player.getPoint(), is(point - Items.Barricade.getPoint()));
         assertThat(player.getToolsNum(), is(itemNum + 1));
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_TOOLS_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_TOOLS_COMMAND));
     }
 
     @Test
@@ -66,7 +66,7 @@ public class PlayerOnToolsLandTest {
 
         assertThat(player.getPoint(), is(point));
         assertThat(player.getToolsNum(), is(itemsNum));
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_TOOLS_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_TOOLS_COMMAND));
     }
 
     @Test
@@ -82,13 +82,13 @@ public class PlayerOnToolsLandTest {
         player.command(Command.TOOLS_BARRICADE);
         assertThat(player.getPoint(), is(point));
         assertThat(player.getToolsNum(), is(itemsNum));
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_TOOLS_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_TOOLS_COMMAND));
     }
 
     @Test
     public void auto_end_turn_when_no_enough_point_to_buy_anyone() throws Exception {
         player.roll();
         assertThat(player.getPoint() < Items.CHEAPEST, is(true));
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
     }
 }

@@ -32,16 +32,16 @@ public class PlayerOnEmptyLandTest {
 
     @Test
     public void should_wait_for_input_when_player_walk_to_empty_land() throws Exception {
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_START));
+        assertThat(player.getStatus(), is(STATUS.TURN_START));
         player.roll();
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_BUY_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_BUY_COMMAND));
     }
 
     @Test
     public void turn_end_after_say_no() throws Exception {
         player.roll();
         player.sayNo();
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
     }
 
     @Test
@@ -53,7 +53,7 @@ public class PlayerOnEmptyLandTest {
         int money = player.getMoney();
         player.sayYes();
 
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
         assertThat(player.getMoney(), is(money - emptyLand.getPrice()));
         assertThat(player.getPlaces().contains(emptyLand), is(true));
         assertThat(emptyLand.getOwner(), is(player));
@@ -68,7 +68,7 @@ public class PlayerOnEmptyLandTest {
         int money = player.getMoney();
         player.sayYes();
 
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
         assertThat(player.getMoney(), is(money));
         assertThat(player.getPlaces().contains(emptyLand), is(false));
         assertNotEquals(emptyLand.getOwner(), player);

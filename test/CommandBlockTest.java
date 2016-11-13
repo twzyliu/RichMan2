@@ -32,7 +32,7 @@ public class CommandBlockTest {
 
         assertThat(player.block(STEP), is(false));
         assertThat(player.getToolsNum(), is(itemsNum));
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class CommandBlockTest {
 
         assertThat(player.block(FAR_STEP), is(false));
         assertThat(player.getToolsNum(), is(itemsNum));
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
 
     @Test
@@ -54,7 +54,7 @@ public class CommandBlockTest {
 
         assertThat(player.block(STEP), is(false));
         assertThat(player.getToolsNum(), is(itemsNum));
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
 
     @Test
@@ -63,7 +63,7 @@ public class CommandBlockTest {
 
         assertThat(player.block(SELF_POSITION), is(false));
         assertThat(player.getToolsNum(), is(player.getToolsNum()));
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
 
     @Test
@@ -74,7 +74,7 @@ public class CommandBlockTest {
         assertThat(player.block(STEP), is(true));
         assertThat(player.getToolsNum(), is(itemsNum - 1));
         assertThat(gameMap.getPlace(player.getPosition() + STEP).getStatus(), is(Place.BARRICADE));
-        assertThat(player.getStatus(), is(Player.STATUS.WAIT_FOR_COMMAND));
+        assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
 }
 

@@ -39,7 +39,7 @@ public class PlayerOnOthersLandTest {
         int money = player.getMoney();
         assertThat(money > emptyLand.getBill(), is(true));
         player.roll();
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
         assertThat(player.getMoney(), is(money - emptyLand.getBill()));
     }
 
@@ -50,7 +50,7 @@ public class PlayerOnOthersLandTest {
         int money = player.getMoney();
         assertThat(money < emptyLand.getBill(), is(true));
         player.roll();
-        assertThat(player.getStatus(), is(Player.STATUS.GAME_OVER));
+        assertThat(player.getStatus(), is(STATUS.GAME_OVER));
     }
 
     @Test
@@ -61,7 +61,7 @@ public class PlayerOnOthersLandTest {
         int money = player.getMoney();
         player.roll();
         assertThat(player.getMoney(), is(money));
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
     }
 
     @Test
@@ -72,7 +72,7 @@ public class PlayerOnOthersLandTest {
         int money = player.getMoney();
         player.roll();
         assertThat(player.getMoney(), is(money));
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class PlayerOnOthersLandTest {
         int money = player.getMoney();
         player.roll();
         assertThat(player.getMoney(), is(money));
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
     }
 }
 

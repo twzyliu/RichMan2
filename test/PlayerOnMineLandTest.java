@@ -33,7 +33,7 @@ public class PlayerOnMineLandTest {
         int point = player.getPoint();
         player.roll();
         assertThat(player.getPoint(), is(point + mineLand.getPoint()));
-        assertThat(player.getStatus(), is(Player.STATUS.TURN_END));
+        assertThat(player.getStatus(), is(STATUS.TURN_END));
 
     }
 }
