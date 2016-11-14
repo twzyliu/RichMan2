@@ -85,13 +85,13 @@ public class Game {
             while (true) {
                 getInput();
                 Items item;
-                if (command.equals(Command.TOOLS_EXIT)) {
+                if (command.equals(Input.TOOLS_EXIT)) {
                     break;
-                } else if (command.equals(Command.TOOLS_BARRICADE)) {
+                } else if (command.equals(Input.TOOLS_BARRICADE)) {
                     item = new Barricade();
-                } else if (command.equals(Command.TOOLS_ROBOT)) {
+                } else if (command.equals(Input.TOOLS_ROBOT)) {
                     item = new Robot();
-                } else if (command.equals(Command.TOOLS_BOMB)) {
+                } else if (command.equals(Input.TOOLS_BOMB)) {
                     item = new Bomb();
                 } else {
                     query(player);
@@ -108,13 +108,13 @@ public class Game {
                     "点数卡   2\n" +
                     "福 神    3\n");
             getInput();
-            if (command.equals(Command.GIFT_GOD)) {
+            if (command.equals(Input.GIFT_GOD)) {
                 player.gainGod();
                 out.print("恭喜获得福神附身5天!路过其它玩家地盘，均可免费!\n");
-            } else if (command.equals(Command.GIFT_MONEY)) {
+            } else if (command.equals(Input.GIFT_MONEY)) {
                 player.gainMoney(Player.GIFT_MONEY);
                 out.print("恭喜获得2000元!\n");
-            } else if (command.equals(Command.GIFT_POINT)) {
+            } else if (command.equals(Input.GIFT_POINT)) {
                 player.gainPoint(Player.GIFT_POINT);
                 out.print("恭喜获得200点!\n");
             } else {
@@ -130,10 +130,10 @@ public class Game {
         boolean finish = false;
         while (!finish) {
             getInput();
-            if (command.equals(Command.YES)) {
+            if (command.equals(Input.YES)) {
                 player.sayYes();
                 finish = true;
-            } else if (command.equals(Command.NO)) {
+            } else if (command.equals(Input.NO)) {
                 player.sayNo();
                 finish = true;
             } else {

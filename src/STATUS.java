@@ -17,40 +17,14 @@ public enum STATUS {
     }, TURN_START, GAME_OVER, WAIT_FOR_TOOLS_COMMAND {
         @Override
         public void command(Player player, String command) {
-            int point = player.getPoint();
-            if (command.equals(Command.TOOLS_EXIT)) {
-                player.setStatus(STATUS.TURN_END);
-            } else if (command.equals(Command.TOOLS_BARRICADE)) {
-                if (point >= player.getBarricade().getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
-                    player.gainPoint(0 - player.getBarricade().getPoint());
-                    player.getBarricade().gainItem();
-                    player.setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
-                }
-            } else if (command.equals(Command.TOOLS_ROBOT)) {
-                if (point >= player.getRobot().getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
-                    player.gainPoint(0 - player.getRobot().getPoint());
-                    player.getRobot().gainItem();
-                    player.setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
-                }
-            } else if (command.equals(Command.TOOLS_BOMB)) {
-                if (point >= player.getBomb().getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
-                    player.gainPoint(0 - player.getBomb().getPoint());
-                        player.getBomb().gainItem();
-                    player.setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
-                }
-            }
+            BuyToolCommand buyToolCommand = new BuyToolCommand(command);
+            buyToolCommand.buyToolAction(player);
         }
     }, WAIT_FOR_GIFT_COMMAND {
         @Override
         public void command(Player player, String command) {
-            if (command.equals(Command.GIFT_MONEY)) {
-                player.gainMoney(Player.GIFT_MONEY);
-                player.setStatus(STATUS.TURN_END);
-            } else if (command.equals(Command.GIFT_POINT)) {
-                player.gainPoint(Player.GIFT_POINT);
-            } else if (command.equals(Command.GIFT_GOD)) {
-                player.gainGod();
-            }
+            ChoseGiftCommand choseGiftCommand = new ChoseGiftCommand(command);
+            choseGiftCommand.choseGiftAction(player);
             player.setStatus(STATUS.TURN_END);
         }
     }, WAIT_FOR_COMMAND;

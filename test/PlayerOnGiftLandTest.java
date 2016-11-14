@@ -36,7 +36,7 @@ public class PlayerOnGiftLandTest {
     public void can_get_money_when_choose_gift_one() throws Exception {
         player.roll();
         int money = player.getMoney();
-        player.command(Command.GIFT_MONEY);
+        player.command(Input.GIFT_MONEY);
 
         assertThat(player.getMoney(), is(money + Player.GIFT_MONEY));
         assertThat(player.getStatus(), is(STATUS.TURN_END));
@@ -46,7 +46,7 @@ public class PlayerOnGiftLandTest {
     public void can_get_point_when_choose_gift_two() throws Exception {
         player.roll();
         int point = player.getPoint();
-        player.command(Command.GIFT_POINT);
+        player.command(Input.GIFT_POINT);
 
         assertThat(player.getPoint(), is(point + Player.GIFT_POINT));
         assertThat(player.getStatus(), is(STATUS.TURN_END));
@@ -56,7 +56,7 @@ public class PlayerOnGiftLandTest {
     public void can_get_god_when_choose_gift_three() throws Exception {
         player.roll();
         int godDays = player.getGodDays();
-        player.command(Command.GIFT_GOD);
+        player.command(Input.GIFT_GOD);
 
         assertThat(player.getGodDays(), is(godDays + Player.GOD_DAYS));
         assertThat(player.getStatus(), is(STATUS.TURN_END));

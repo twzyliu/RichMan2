@@ -38,7 +38,7 @@ public class PlayerOnToolsLandTest {
         assertThat(player.getStatus(), is(STATUS.TURN_START));
         player.gainPoint(TestHelper.MOREPOINT);
         player.roll();
-        player.command(Command.TOOLS_EXIT);
+        player.command(Input.TOOLS_EXIT);
         assertThat(player.getStatus(), is(STATUS.TURN_END));
     }
 
@@ -48,7 +48,7 @@ public class PlayerOnToolsLandTest {
         player.roll();
         int point = player.getPoint();
         int itemNum = player.getToolsNum();
-        player.command(Command.TOOLS_BARRICADE);
+        player.command(Input.TOOLS_BARRICADE);
 
         assertThat(player.getPoint(), is(point - player.getBarricade().getPoint()));
         assertThat(player.getToolsNum(), is(itemNum + 1));
@@ -61,7 +61,7 @@ public class PlayerOnToolsLandTest {
         player.roll();
         int point = player.getPoint();
         int itemsNum = player.getToolsNum();
-        player.command(Command.TOOLS_BARRICADE);
+        player.command(Input.TOOLS_BARRICADE);
 
         assertThat(player.getPoint(), is(point));
         assertThat(player.getToolsNum(), is(itemsNum));
@@ -73,12 +73,12 @@ public class PlayerOnToolsLandTest {
         player.gainPoint(TestHelper.MOREPOINT);
         player.roll();
         for (int inxex = 0; inxex < Player.MAX_TOOLS_NUM; inxex++) {
-            player.command(Command.TOOLS_BARRICADE);
+            player.command(Input.TOOLS_BARRICADE);
         }
 
         int point = player.getPoint();
         int itemsNum = player.getToolsNum();
-        player.command(Command.TOOLS_BARRICADE);
+        player.command(Input.TOOLS_BARRICADE);
         assertThat(player.getPoint(), is(point));
         assertThat(player.getToolsNum(), is(itemsNum));
         assertThat(player.getStatus(), is(STATUS.WAIT_FOR_TOOLS_COMMAND));
