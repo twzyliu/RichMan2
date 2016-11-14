@@ -9,4 +9,10 @@ public class GiftLand extends Place{
     public String getStatusSymbol() {
         return GIFTLAND_SYMBOL;
     }
+
+    @Override
+    public void playerCome(Player player) {
+        player.setStatus(STATUS.WAIT_FOR_GIFT_COMMAND);
+    }
+
 }

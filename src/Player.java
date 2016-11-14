@@ -39,80 +39,17 @@ public class Player {
     public void roll() {
         position = map.move(this, dice.roll());
         Place place = map.getPlace(position);
-
-        if (place instanceof EmptyLand) {
-            Player owner = ((EmptyLand) place).getOwner();
-            if (owner == null) {
-                status = STATUS.WAIT_FOR_BUY_COMMAND;
-            } else if (owner == this) {
-                status = STATUS.WAIT_FOR_UPGRADE_COMMAND;
-            } else {
-                int prisonDays = owner.getPrisonDays();
-                int hosipitalDays = owner.getHosipitalDays();
-                if (godDays > 0) {
-                    out.printf("恭喜福神附体剩余%s天,免交过路费!\n", godDays);
-                }
-                if (prisonDays > 0) {
-                    out.printf("房屋主人进监狱啦,还有%s天出狱,免交过路费!\n", prisonDays);
-                }
-                if (hosipitalDays > 0) {
-                    out.printf("房屋主人进医院啦,还有%s天出院,免交过路费!\n", hosipitalDays);
-                }
-                status = STATUS.TURN_END;
-                if (godDays + prisonDays + hosipitalDays == 0) {
-                    payForOthersLand((EmptyLand) place);
-                }
-            }
-        } else if (place instanceof ToolsLand) {
-            if (point >= Items.CHEAPEST) {
-                status = STATUS.WAIT_FOR_TOOLS_COMMAND;
-            } else {
-                out.print("欢迎来到道具屋,但是你的点数不够,拜拜~\n");
-                status = STATUS.TURN_END;
-            }
-        } else if (place instanceof GiftLand) {
-            status = STATUS.WAIT_FOR_GIFT_COMMAND;
-        } else if (place instanceof MineLand) {
-            int point = ((MineLand) place).getPoint();
-            this.point += point;
-            out.printf("欢迎进入矿地,你已获得%s点,现在拥有%s点\n", point, this.point);
-            status = STATUS.TURN_END;
-        } else if (place instanceof Hospital)
-
-        {
-            out.print("Welcome to Hospital! But we have nothing to do...\n");
-            status = STATUS.TURN_END;
-        } else if (place instanceof Prison)
-
-        {
-            out.printf("恭喜进监狱,休息休息%s天\n", PRISON_DAY);
-            gotoPrison();
-            status = STATUS.TURN_END;
-        } else if (place instanceof MagicLand)
-
-        {
-            out.print("Welcome to MagicHouse! But we have nothing to do...\n");
-            status = STATUS.TURN_END;
-        } else if (place instanceof StartingPoint)
-
-        {
-            out.print("This is StartingPoint, your new start!\n");
-            status = STATUS.TURN_END;
-        }
+        place.playerCome(this);
     }
 
-    private void payForOthersLand(EmptyLand place) {
-        int bill = place.getBill();
-        String playerName = place.getOwner().getName();
-        if (money >= bill) {
-            status = STATUS.TURN_END;
-        } else {
-            status = STATUS.GAME_OVER;
-        }
-        money -= bill;
-        place.getOwner().gainMoney(bill);
-        out.printf("已支付%s的地产过路费%s元,剩余金钱%s元!\n", playerName, bill, money);
+    public void gotoStartingPoint() {
+        out.print("This is StartingPoint, your new start!\n");
+        status = STATUS.TURN_END;
+    }
 
+    public void gotoMagicLand() {
+        out.print("Welcome to MagicHouse! But we have nothing to do...\n");
+        status = STATUS.TURN_END;
     }
 
     public List<EmptyLand> getPlaces() {
@@ -136,7 +73,9 @@ public class Player {
     }
 
     public void gotoPrison() {
+        out.printf("恭喜进监狱,休息休息%s天\n", PRISON_DAY);
         prisonDays = PRISON_DAY;
+        status = STATUS.TURN_END;
     }
 
     public void gotoHosipital() {
@@ -320,5 +259,56 @@ public class Player {
         return false;
     }
 
+    public void gotoMineLand(int point) {
+        gainPoint(point);
+        out.printf("欢迎进入矿地,你已获得%s点,现在拥有%s点\n", point, getPoint());
+        setStatus(STATUS.TURN_END);
+    }
+
+    public void gotoToolsLand() {
+        if (getPoint() >= Items.CHEAPEST) {
+            setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
+        } else {
+            out.print("欢迎来到道具屋,但是你的点数不够,拜拜~\n");
+            setStatus(STATUS.TURN_END);
+        }
+    }
+
+    public void gotoEmptyLand(Player owner, int bill) {
+        if (owner == null) {
+            setStatus(STATUS.WAIT_FOR_BUY_COMMAND);
+        } else if (owner == this) {
+            setStatus(STATUS.WAIT_FOR_UPGRADE_COMMAND);
+        } else {
+            payForOthersLand(owner, bill);
+        }
+    }
+
+    private void payForOthersLand(Player owner, int bill) {
+        int prisonDays = owner.getPrisonDays();
+        int hosipitalDays = owner.getHosipitalDays();
+        int godDays = getGodDays();
+        if (godDays > 0) {
+            out.printf("恭喜福神附体剩余%s天,免交过路费!\n", godDays);
+        }
+        if (prisonDays > 0) {
+            out.printf("房屋主人进监狱啦,还有%s天出狱,免交过路费!\n", prisonDays);
+        }
+        if (hosipitalDays > 0) {
+            out.printf("房屋主人进医院啦,还有%s天出院,免交过路费!\n", hosipitalDays);
+        }
+        setStatus(STATUS.TURN_END);
+        if (godDays + prisonDays + hosipitalDays == 0) {
+            String playerName = owner.getName();
+            if (getMoney() >= bill) {
+                setStatus(STATUS.TURN_END);
+            } else {
+                setStatus(STATUS.GAME_OVER);
+            }
+            gainMoney(0 - bill);
+            owner.gainMoney(bill);
+            out.printf("已支付%s的地产过路费%s元,剩余金钱%s元!\n", playerName, bill, getMoney());
+        }
+    }
 
 }

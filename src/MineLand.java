@@ -17,4 +17,11 @@ public class MineLand extends Place {
     public String getStatusSymbol() {
         return MINELAND_SYMBOL;
     }
+
+    @Override
+    public void playerCome(Player player) {
+        int point = getPoint();
+        player.gotoMineLand(point);
+    }
+
 }

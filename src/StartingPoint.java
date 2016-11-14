@@ -9,4 +9,10 @@ public class StartingPoint extends Place {
     public String getStatusSymbol() {
         return STARTPOINT_SYMBOL;
     }
+
+    @Override
+    public void playerCome(Player player) {
+        player.gotoStartingPoint();
+    }
+
 }

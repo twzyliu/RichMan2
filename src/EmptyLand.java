@@ -34,7 +34,7 @@ public class EmptyLand extends Place {
     }
 
     public int getBill() {
-        return (int)((price / 2) * pow(2, level));
+        return (int) ((price / 2) * pow(2, level));
     }
 
     public int getSellMoney() {
@@ -49,4 +49,12 @@ public class EmptyLand extends Place {
     public String getStatusSymbol() {
         return String.valueOf(level);
     }
+
+    @Override
+    public void playerCome(Player player) {
+        Player owner = getOwner();
+        int bill = getBill();
+        player.gotoEmptyLand(owner, bill);
+    }
+
 }

@@ -61,4 +61,7 @@ public class Place {
         playerSymbol.remove(symbol);
     }
 
+    public void playerCome(Player player) {
+    }
+
 }

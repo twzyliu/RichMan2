@@ -9,4 +9,10 @@ public class ToolsLand extends Place{
     public String getStatusSymbol() {
         return TOOLSLAND_SYMBOL;
     }
+
+    @Override
+    public void playerCome(Player player) {
+        player.gotoToolsLand();
+    }
+
 }
