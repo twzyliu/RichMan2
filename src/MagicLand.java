@@ -13,7 +13,6 @@ public class MagicLand extends Place {
     @Override
     public void playerCome(Player player) {
         player.gotoMagicLand();
-
     }
 
 }

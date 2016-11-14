@@ -33,7 +33,7 @@ public class CommandBlockTest {
 
     @Test
     public void cannot_use_barricade_when_position_is_too_far() throws Exception {
-        Items.Barricade.gainItem(player);
+        player.getBarricade().gainItem();
         int itemsNum = player.getToolsNum();
 
         assertThat(player.block(TestHelper.FAR_STEP), is(false));
@@ -43,8 +43,8 @@ public class CommandBlockTest {
 
     @Test
     public void cannot_use_barricade_when_item_on_target() throws Exception {
-        Items.Barricade.gainItem(player);
-        Items.Barricade.gainItem(player);
+        player.getBarricade().gainItem();
+        player.getBarricade().gainItem();
         player.block(TestHelper.STEP);
         int itemsNum = player.getToolsNum();
 
@@ -55,7 +55,7 @@ public class CommandBlockTest {
 
     @Test
     public void cannot_use_barricade_when_player_on_target() throws Exception {
-        Items.Barricade.gainItem(player);
+        player.getBarricade().gainItem();
 
         assertThat(player.block(TestHelper.SELF_POSITION), is(false));
         assertThat(player.getToolsNum(), is(player.getToolsNum()));
@@ -64,7 +64,7 @@ public class CommandBlockTest {
 
     @Test
     public void should_change_map_when_use_barricade() throws Exception {
-        Items.Barricade.gainItem(player);
+        player.getBarricade().gainItem();
         int itemsNum = player.getToolsNum();
 
         assertThat(player.block(TestHelper.STEP), is(true));

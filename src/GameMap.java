@@ -76,8 +76,8 @@ public class GameMap {
         return places.get(position % getSize());
     }
 
-    public void robotsTool(int position) {
-        for (int index = position + 1; index < position + 1 + Items.ROBOT_STEP; index++) {
+    public void robotsTool(int position, int step) {
+        for (int index = position + 1; index < position + 1 + step; index++) {
             Place place = getPlace(index % getSize());
             place.clearToolStatus();
         }

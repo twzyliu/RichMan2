@@ -37,9 +37,9 @@ public class Place {
         if (status == PLAYER) {
             return PLAYER_SYMBOL;
         } else if (status == BARRICADE) {
-            return Items.Barricade.getSymbol();
+            return Barricade.SYMBOL;
         } else if (status == BOMB) {
-            return Items.Bomb.getSymbol();
+            return Bomb.SYMBOL;
         } else {
             return getStatusSymbol();
         }

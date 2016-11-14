@@ -28,7 +28,7 @@ public class Game {
     private Player winner = null;
     private int round = 1;
     private List<Items> items = new ArrayList<>(
-            asList(Items.Barricade, Items.Robot, Items.Bomb)
+            asList(new Barricade(), new Robot(), new Bomb())
     );
 
 
@@ -84,17 +84,21 @@ public class Game {
                     "你现在拥有%s点,按F键退出\n", player.getPoint());
             while (true) {
                 getInput();
+                Items item;
                 if (command.equals(Command.TOOLS_EXIT)) {
                     break;
                 } else if (command.equals(Command.TOOLS_BARRICADE)) {
-                    player.buyTool(Items.Barricade);
+                    item = new Barricade();
                 } else if (command.equals(Command.TOOLS_ROBOT)) {
-                    player.buyTool(Items.Robot);
+                    item = new Robot();
                 } else if (command.equals(Command.TOOLS_BOMB)) {
-                    player.buyTool(Items.Bomb);
+                    item = new Bomb();
+                } else {
+                    query(player);
+                    out.print("按F键退出\n");
+                    continue;
                 }
-                query(player);
-                out.print("按F键退出\n");
+                player.buyTool(item);
             }
         } else if (status.equals(STATUS.WAIT_FOR_GIFT_COMMAND)) {
             player.setStatus(STATUS.TURN_END);
@@ -178,9 +182,9 @@ public class Game {
     private void query(Player player) {
         int money = player.getMoney();
         int point = player.getPoint();
-        int barricades = Items.Barricade.getNum(player);
-        int bombs = Items.Bomb.getNum(player);
-        int robots = Items.Robot.getNum(player);
+        int barricades = player.getBarricade().getNum();
+        int bombs = player.getBomb().getNum();
+        int robots = player.getRobot().getNum();
         int landLevel0 = player.getPlaceByLevel(0);
         int landLevel1 = player.getPlaceByLevel(1);
         int landLevel2 = player.getPlaceByLevel(2);

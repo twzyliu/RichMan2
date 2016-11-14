@@ -21,27 +21,21 @@ public enum STATUS {
             if (command.equals(Command.TOOLS_EXIT)) {
                 player.setStatus(STATUS.TURN_END);
             } else if (command.equals(Command.TOOLS_BARRICADE)) {
-                if (point >= Items.Barricade.getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
-                    player.gainPoint(0 - Items.Barricade.getPoint());
-
-                    Items.Barricade.gainItem(player);
-
+                if (point >= player.getBarricade().getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
+                    player.gainPoint(0 - player.getBarricade().getPoint());
+                    player.getBarricade().gainItem();
                     player.setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
                 }
             } else if (command.equals(Command.TOOLS_ROBOT)) {
-                if (point >= Items.Robot.getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
-                    player.gainPoint(0 - Items.Robot.getPoint());
-
-                    Items.Robot.gainItem(player);
-
+                if (point >= player.getRobot().getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
+                    player.gainPoint(0 - player.getRobot().getPoint());
+                    player.getRobot().gainItem();
                     player.setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
                 }
             } else if (command.equals(Command.TOOLS_BOMB)) {
-                if (point >= Items.Bomb.getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
-                    player.gainPoint(0 - Items.Bomb.getPoint());
-
-                    Items.Bomb.gainItem(player);
-
+                if (point >= player.getBomb().getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
+                    player.gainPoint(0 - player.getBomb().getPoint());
+                        player.getBomb().gainItem();
                     player.setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
                 }
             }

@@ -4,7 +4,7 @@
 public interface Command {
     String TOOLS_EXIT = "f";
     String TOOLS_BARRICADE = "1";
-    String TOOLS_ROBOT= "2";
+    String TOOLS_ROBOT = "2";
     String TOOLS_BOMB = "3";
     String GIFT_MONEY = "1";
     String GIFT_POINT = "2";

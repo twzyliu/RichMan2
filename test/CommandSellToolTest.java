@@ -22,18 +22,18 @@ public class CommandSellToolTest {
 
     @Test
     public void cannot_sell_tool_when_not_have_tools() throws Exception {
-        assertThat(player.sellTool(Items.Barricade), is(false));
+        assertThat(player.sellTool(player.getBarricade()), is(false));
         assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }
 
     @Test
     public void should_change_point_and_toolsnum_when_selltool() throws Exception {
-        Items.Barricade.gainItem(player);
+        player.getBarricade().gainItem();
         int point = player.getPoint();
         int toolsNum = player.getToolsNum();
 
-        assertThat(player.sellTool(Items.Barricade), is(true));
-        assertThat(player.getPoint(), is(point+ Items.Barricade.getPoint()));
+        assertThat(player.sellTool(player.getBarricade()), is(true));
+        assertThat(player.getPoint(), is(point+ player.getBarricade().getPoint()));
         assertThat(player.getToolsNum(), is(toolsNum - 1));
         assertThat(player.getStatus(), is(STATUS.WAIT_FOR_COMMAND));
     }

@@ -50,7 +50,7 @@ public class PlayerOnToolsLandTest {
         int itemNum = player.getToolsNum();
         player.command(Command.TOOLS_BARRICADE);
 
-        assertThat(player.getPoint(), is(point - Items.Barricade.getPoint()));
+        assertThat(player.getPoint(), is(point - player.getBarricade().getPoint()));
         assertThat(player.getToolsNum(), is(itemNum + 1));
         assertThat(player.getStatus(), is(STATUS.WAIT_FOR_TOOLS_COMMAND));
     }

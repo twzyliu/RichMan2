@@ -24,6 +24,9 @@ public class Player {
     private int hosipitalDays = 0;
     private int point = 0;
     private int playerNum = 0;
+    private Barricade barricade = new Barricade();
+    private Robot robot = new Robot();
+    private Bomb bomb = new Bomb();
 
     public Player(int playerNum, Dice dice, GameMap map) {
         this.playerNum = playerNum;
@@ -99,7 +102,7 @@ public class Player {
     }
 
     public int getToolsNum() {
-        return Items.Barricade.getNum(this) + Items.Robot.getNum(this) + Items.Bomb.getNum(this);
+        return barricade.getNum() + bomb.getNum() + robot.getNum();
     }
 
     public void gainPoint(int point) {
@@ -120,12 +123,12 @@ public class Player {
 
     public boolean block(int step) {
         status = STATUS.WAIT_FOR_COMMAND;
-        return Items.Barricade.useBarricade(step, this);
+        return barricade.use(getMap(), getPosition(), step);
     }
 
     public boolean bomb(int step) {
         status = STATUS.WAIT_FOR_COMMAND;
-        return Items.Bomb.useBomb(step, this);
+        return bomb.use(getMap(), getPosition(), step);
     }
 
     public boolean sell(int myland) {
@@ -170,9 +173,9 @@ public class Player {
 
     public boolean sellTool(Items item) {
         status = STATUS.WAIT_FOR_COMMAND;
-        if (item.getNum(this) > 0) {
+        if (item.getNum() > 0) {
             point += item.getPoint();
-            item.loseItem(this);
+            item.loseItem();
             out.print("成功卖出道具!\n");
             return true;
         }
@@ -184,7 +187,7 @@ public class Player {
         status = STATUS.WAIT_FOR_COMMAND;
         int itemPoint = item.getPoint();
         if (getToolsNum() < 10 & point >= itemPoint) {
-            item.gainItem(this);
+            item.gainItem();
             out.print("恭喜购买道具成功!\n");
             point -= itemPoint;
             return true;
@@ -206,7 +209,7 @@ public class Player {
 
     public boolean robot() {
         status = STATUS.WAIT_FOR_COMMAND;
-        return Items.Robot.useRobot(this);
+        return robot.use(getMap(), getPosition(), 0);
     }
 
     public static String getPlayerName(Integer playerNum) {
@@ -311,4 +314,15 @@ public class Player {
         }
     }
 
+    public Barricade getBarricade() {
+        return barricade;
+    }
+
+    public Robot getRobot() {
+        return robot;
+    }
+
+    public Bomb getBomb() {
+        return bomb;
+    }
 }
