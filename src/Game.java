@@ -178,9 +178,9 @@ public class Game {
     private void query(Player player) {
         int money = player.getMoney();
         int point = player.getPoint();
-        int barricades = player.getBarricades();
-        int bombs = player.getBombs();
-        int robots = player.getRobots();
+        int barricades = Items.Barricade.getNum(player);
+        int bombs = Items.Bomb.getNum(player);
+        int robots = Items.Robot.getNum(player);
         int landLevel0 = player.getPlaceByLevel(0);
         int landLevel1 = player.getPlaceByLevel(1);
         int landLevel2 = player.getPlaceByLevel(2);

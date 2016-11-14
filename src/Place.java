@@ -60,4 +60,5 @@ public class Place {
     public void removePlayerSymbol(String symbol) {
         playerSymbol.remove(symbol);
     }
+
 }
