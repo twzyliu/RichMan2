@@ -23,9 +23,6 @@ public class Player {
     private int prisonDays = 0;
     private int hosipitalDays = 0;
     private int point = 0;
-    private int barricades = 0;
-    private int robots = 0;
-    private int bombs = 0;
     private int playerNum = 0;
 
     public Player(int playerNum, Dice dice, GameMap map) {
@@ -131,11 +128,11 @@ public class Player {
     }
 
     public void sayYes() {
-        status.sayYes(this);
+        getStatus().sayYes(this);
     }
 
     public void sayNo() {
-        status.sayNo(this);
+        getStatus().sayNo(this);
     }
 
     public void gotoPrison() {
@@ -163,7 +160,7 @@ public class Player {
     }
 
     public int getToolsNum() {
-        return barricades + robots + bombs;
+        return getBarricades() + getRobots() + getBombs();
     }
 
     public void gainPoint(int point) {
@@ -172,10 +169,6 @@ public class Player {
 
     public void gainMoney(int money) {
         this.money += money;
-    }
-
-    public void gainBarricade() {
-        barricades += 1;
     }
 
     public int getGodDays() {
@@ -188,14 +181,14 @@ public class Player {
 
     public boolean block(int step) {
         status = STATUS.WAIT_FOR_COMMAND;
-        boolean hasBarricade = barricades >= 1;
+        boolean hasBarricade = getBarricades() >= 1;
         boolean notFar = step > -11 & step < 11;
         int target = position + step;
         Place place = map.getPlace(target);
         if (hasBarricade & notFar & place.isEmpty()) {
             out.print("成功放置路障!\n");
             place.setStatus(Place.BARRICADE);
-            barricades -= 1;
+            Items.Barricade.loseItem(this);
             return true;
         } else {
             out.print("放置路障失败!\n");
@@ -205,23 +198,19 @@ public class Player {
 
     public boolean bomb(int step) {
         status = STATUS.WAIT_FOR_COMMAND;
-        boolean hasBombs = bombs >= 1;
+        boolean hasBombs = getBombs() >= 1;
         boolean notFar = step > -11 & step < 11;
         int target = position + step;
         Place place = map.getPlace(target);
         if (hasBombs & notFar & place.isEmpty()) {
             place.setStatus(Place.BOMB);
-            bombs -= 1;
+            Items.Bomb.loseItem(this);
             out.print("炸弹已经成功放置!\n");
             return true;
         } else {
             out.print("炸弹放置失败!\n");
             return false;
         }
-    }
-
-    public void gainBomb() {
-        bombs += 1;
     }
 
     public boolean sell(int myland) {
@@ -266,27 +255,11 @@ public class Player {
 
     public boolean sellTool(Items item) {
         status = STATUS.WAIT_FOR_COMMAND;
-        if (item.equals(Items.Barricade)) {
-            if (barricades > 0) {
-                point += item.getPoint();
-                barricades -= 1;
-                out.print("成功卖出路障!\n");
-                return true;
-            }
-        } else if (item.equals(Items.Robot)) {
-            if (robots > 0) {
-                point += item.getPoint();
-                robots -= 1;
-                out.print("成功卖出机器娃娃!\n");
-                return true;
-            }
-        } else if (item.equals(Items.Bomb)) {
-            if (bombs > 0) {
-                point += item.getPoint();
-                bombs -= 1;
-                out.print("成功卖出炸弹!\n");
-                return true;
-            }
+        if (item.getNum(this) > 0) {
+            point += item.getPoint();
+            item.loseItem(this);
+            out.print("成功卖出道具!\n");
+            return true;
         }
         out.print("什么都没有,你想卖个啥...\n");
         return false;
@@ -296,16 +269,8 @@ public class Player {
         status = STATUS.WAIT_FOR_COMMAND;
         int itemPoint = item.getPoint();
         if (getToolsNum() < 10 & point >= itemPoint) {
-            if (item.equals(Items.Barricade)) {
-                barricades += 1;
-                out.print("恭喜购买路障成功!\n");
-            } else if (item.equals(Items.Robot)) {
-                robots += 1;
-                out.print("恭喜购买机器娃娃成功!\n");
-            } else if (item.equals(Items.Bomb)) {
-                bombs += 1;
-                out.print("恭喜购买炸弹成功!\n");
-            }
+            item.gainItem(this);
+            out.print("恭喜购买道具成功!\n");
             point -= itemPoint;
             return true;
         } else {
@@ -315,15 +280,15 @@ public class Player {
     }
 
     public int getBarricades() {
-        return barricades;
+        return Items.Barricade.getNum(this);
     }
 
     public int getRobots() {
-        return robots;
+        return Items.Robot.getNum(this);
     }
 
     public int getBombs() {
-        return bombs;
+        return Items.Bomb.getNum(this);
     }
 
     public int getPlaceByLevel(int level) {
@@ -336,15 +301,11 @@ public class Player {
         return placeNum;
     }
 
-    public void gainRobot() {
-        robots += 1;
-    }
-
     public boolean robot() {
         status = STATUS.WAIT_FOR_COMMAND;
-        if (robots > 0) {
+        if (getRobots() > 0) {
             map.robotsTool(position);
-            robots -= 1;
+            Items.Robot.loseItem(this);
             out.print("机器娃娃已经出动!\n");
             return true;
         } else {

@@ -23,19 +23,25 @@ public enum STATUS {
             } else if (command.equals(Command.TOOLS_BARRICADE)) {
                 if (point >= Items.Barricade.getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
                     player.gainPoint(0 - Items.Barricade.getPoint());
-                    player.gainBarricade();
+
+                    Items.Barricade.gainItem(player);
+
                     player.setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
                 }
             } else if (command.equals(Command.TOOLS_ROBOT)) {
                 if (point >= Items.Robot.getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
                     player.gainPoint(0 - Items.Robot.getPoint());
-                    player.gainRobot();
+
+                    Items.Robot.gainItem(player);
+
                     player.setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
                 }
             } else if (command.equals(Command.TOOLS_BOMB)) {
                 if (point >= Items.Bomb.getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
                     player.gainPoint(0 - Items.Bomb.getPoint());
-                    player.gainBomb();
+
+                    Items.Bomb.gainItem(player);
+
                     player.setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
                 }
             }

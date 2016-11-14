@@ -28,7 +28,7 @@ public class CommandSellToolTest {
 
     @Test
     public void should_change_point_and_toolsnum_when_selltool() throws Exception {
-        player.gainBarricade();
+        Items.Barricade.gainItem(player);
         int point = player.getPoint();
         int toolsNum = player.getToolsNum();
 

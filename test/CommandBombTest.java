@@ -33,7 +33,7 @@ public class CommandBombTest {
 
     @Test
     public void cannot_use_bomb_when_position_is_too_far() throws Exception {
-        player.gainBomb();
+        Items.Bomb.gainItem(player);
         int itemsNum = player.getToolsNum();
 
         assertThat(player.bomb(TestHelper.FAR_STEP), is(false));
@@ -43,8 +43,8 @@ public class CommandBombTest {
 
     @Test
     public void cannot_use_bomb_when_item_on_target() throws Exception {
-        player.gainBomb();
-        player.gainBomb();
+        Items.Bomb.gainItem(player);
+        Items.Bomb.gainItem(player);
         player.bomb(TestHelper.STEP);
         int itemsNum = player.getToolsNum();
 
@@ -55,7 +55,7 @@ public class CommandBombTest {
 
     @Test
     public void cannot_use_bomb_when_player_on_target() throws Exception {
-        player.gainBomb();
+        Items.Bomb.gainItem(player);
 
         assertThat(player.bomb(TestHelper.SELF_POSITION), is(false));
         assertThat(player.getToolsNum(), is(player.getToolsNum()));
@@ -64,7 +64,7 @@ public class CommandBombTest {
 
     @Test
     public void should_change_map_when_use_bomb() throws Exception {
-        player.gainBomb();
+        Items.Bomb.gainItem(player);
         int itemsNum = player.getToolsNum();
 
         assertThat(player.bomb(TestHelper.STEP), is(true));

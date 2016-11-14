@@ -33,9 +33,9 @@ public class CommandRobotTest {
 
     @Test
     public void should_change_map_and_toolsnum_when_use_robot() throws Exception {
-        player.gainBarricade();
+        Items.Barricade.gainItem(player);
         player.block(TestHelper.STEP);
-        player.gainRobot();
+        Items.Robot.gainItem(player);
         int itemsNum = player.getToolsNum();
 
         assertThat(player.robot(), is(true));

@@ -34,7 +34,7 @@ public class GameMapTest {
         when(dice.roll()).thenReturn(TestHelper.STEP + 1);
         Player player = new Player(TestHelper.PLAYER_1, dice, gameMap);
         int position = player.getPosition();
-        player.gainBarricade();
+        Items.Barricade.gainItem(player);
         player.block(TestHelper.STEP);
         player.roll();
 
@@ -46,7 +46,7 @@ public class GameMapTest {
         Dice dice = mock(Dice.class);
         when(dice.roll()).thenReturn(TestHelper.STEP);
         Player player = new Player(TestHelper.PLAYER_1, dice, gameMap);
-        player.gainBomb();
+        Items.Bomb.gainItem(player);
         player.bomb(TestHelper.STEP);
         player.roll();
 
