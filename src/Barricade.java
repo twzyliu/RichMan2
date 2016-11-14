@@ -5,9 +5,10 @@ import static java.lang.System.out;
  */
 public class Barricade extends Items {
     public static final String SYMBOL = "#";
-    private static final int point = 50;
 
     public Barricade() {
+        super();
+        point = 50;
     }
 
     @Override

@@ -1,7 +1,7 @@
 /**
  * Created by zyongliu on 14/11/16.
  */
-public class ChoseGiftCommand {
+public class ChoseGiftCommand implements CommandPreprocess {
     private Command command;
 
     public ChoseGiftCommand(String command) {
@@ -14,7 +14,8 @@ public class ChoseGiftCommand {
         }
     }
 
-    public void choseGiftAction(Player player) {
+    @Override
+    public void action(Player player) {
         command.action(player);
     }
 }

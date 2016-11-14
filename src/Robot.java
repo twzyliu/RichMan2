@@ -4,11 +4,11 @@ import static java.lang.System.out;
  * Created by zyongliu on 14/11/16.
  */
 public class Robot extends Items {
-    private static final int point = 30;
     private static final int robotStep = 10;
 
     public Robot() {
         super();
+        point = 30;
     }
 
     @Override
@@ -22,9 +22,5 @@ public class Robot extends Items {
             out.print("对不起,你穷的连机器娃娃都没有...\n");
             return false;
         }
-    }
-
-    public static int getRobotStep() {
-        return robotStep;
     }
 }

@@ -20,7 +20,7 @@ public class PlayerOnPrisonTest {
     public void setUp() throws Exception {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
-        prison = mock(Prison.class);
+        prison = new Prison();
         player = new Player(TestHelper.PLAYER_1, dice, map);
         when(map.getPlace(anyInt())).thenReturn(prison);
     }

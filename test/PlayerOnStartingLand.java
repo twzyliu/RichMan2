@@ -20,7 +20,7 @@ public class PlayerOnStartingLand {
     public void setUp() throws Exception {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
-        startingPoint = mock(StartingPoint.class);
+        startingPoint = new StartingPoint();
         player = new Player(TestHelper.PLAYER_1, dice, map);
         when(map.getPlace(anyInt())).thenReturn(startingPoint);
     }

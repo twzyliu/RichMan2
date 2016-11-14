@@ -1,7 +1,7 @@
 /**
  * Created by zyongliu on 14/11/16.
  */
-public class BuyToolCommand {
+public class BuyToolCommand implements CommandPreprocess {
     private Command command;
 
     public BuyToolCommand(String command) {
@@ -16,7 +16,8 @@ public class BuyToolCommand {
         }
     }
 
-    public void buyToolAction(Player player) {
+    @Override
+    public void action(Player player) {
         command.action(player);
     }
 }

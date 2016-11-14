@@ -10,8 +10,8 @@ public class Place {
     public static final int BARRICADE = 2;
     public static final int BOMB = 3;
     public static final String PLAYER_SYMBOL = "!";
-    private int status = 0;
-    private List<String> playerSymbol = new ArrayList<>();
+    protected int status = 0;
+    protected List<String> playerSymbol = new ArrayList<>();
 
     public int getStatus() {
         return status;

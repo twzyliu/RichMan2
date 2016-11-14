@@ -20,7 +20,7 @@ public class PlayerOnMagicLandTest {
     public void setUp() throws Exception {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
-        magicLand = mock(MagicLand.class);
+        magicLand = new MagicLand();
         player = new Player(TestHelper.PLAYER_1, dice, map);
         when(map.getPlace(anyInt())).thenReturn(magicLand);
     }

@@ -20,7 +20,7 @@ public class PlayerOnHospitalTest {
     public void setUp() throws Exception {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
-        hospatil = mock(Hospital.class);
+        hospatil = new Hospital();
         player = new Player(TestHelper.PLAYER_1, dice, map);
         when(map.getPlace(anyInt())).thenReturn(hospatil);
     }

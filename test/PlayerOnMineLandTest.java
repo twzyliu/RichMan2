@@ -20,19 +20,16 @@ public class PlayerOnMineLandTest {
     public void setUp() throws Exception {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
-        mineLand = mock(MineLand.class);
+        mineLand = new MineLand(TestHelper.POINT);
         player = new Player(TestHelper.PLAYER_1, dice, map);
         when(map.getPlace(anyInt())).thenReturn(mineLand);
     }
 
     @Test
     public void should_get_point_when_on_mineland() throws Exception {
-        when(mineLand.getPoint()).thenReturn(TestHelper.POINT);
-
         int point = player.getPoint();
         player.roll();
         assertThat(player.getPoint(), is(point + mineLand.getPoint()));
         assertThat(player.getStatus(), is(STATUS.TURN_END));
-
     }
 }

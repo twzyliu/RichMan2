@@ -3,8 +3,8 @@
  */
 public class Items {
     public static final int CHEAPEST = 30;
-    private int point;
-    private int num = 0;
+    protected int point = 0;
+    protected int num = 0;
 
     public Items() {
     }
@@ -27,5 +27,13 @@ public class Items {
 
     public boolean use(GameMap gameMap, int position, int step) {
         return true;
+    }
+
+    public void buy(Player player) {
+        if (player.getPoint() >= getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
+            player.gainPoint(0 - getPoint());
+            gainItem();
+            player.setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
+        }
     }
 }

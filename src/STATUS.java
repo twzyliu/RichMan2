@@ -17,14 +17,12 @@ public enum STATUS {
     }, TURN_START, GAME_OVER, WAIT_FOR_TOOLS_COMMAND {
         @Override
         public void command(Player player, String command) {
-            BuyToolCommand buyToolCommand = new BuyToolCommand(command);
-            buyToolCommand.buyToolAction(player);
+            new BuyToolCommand(command).action(player);
         }
     }, WAIT_FOR_GIFT_COMMAND {
         @Override
         public void command(Player player, String command) {
-            ChoseGiftCommand choseGiftCommand = new ChoseGiftCommand(command);
-            choseGiftCommand.choseGiftAction(player);
+            new ChoseGiftCommand(command).action(player);
             player.setStatus(STATUS.TURN_END);
         }
     }, WAIT_FOR_COMMAND;

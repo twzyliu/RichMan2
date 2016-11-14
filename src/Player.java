@@ -288,6 +288,7 @@ public class Player {
     }
 
     private void payForOthersLand(Player owner, int bill) {
+        setStatus(STATUS.TURN_END);
         int prisonDays = owner.getPrisonDays();
         int hosipitalDays = owner.getHosipitalDays();
         int godDays = getGodDays();
@@ -300,12 +301,9 @@ public class Player {
         if (hosipitalDays > 0) {
             out.printf("房屋主人进医院啦,还有%s天出院,免交过路费!\n", hosipitalDays);
         }
-        setStatus(STATUS.TURN_END);
         if (godDays + prisonDays + hosipitalDays == 0) {
             String playerName = owner.getName();
-            if (getMoney() >= bill) {
-                setStatus(STATUS.TURN_END);
-            } else {
+            if (getMoney() < bill) {
                 setStatus(STATUS.GAME_OVER);
             }
             gainMoney(0 - bill);
@@ -325,4 +323,5 @@ public class Player {
     public Bomb getBomb() {
         return bomb;
     }
+
 }

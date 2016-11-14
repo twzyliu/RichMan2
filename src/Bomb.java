@@ -5,10 +5,10 @@ import static java.lang.System.out;
  */
 public class Bomb extends Items {
     public static final String SYMBOL = "@";
-    private static final int point = 50;
 
     public Bomb() {
         super();
+        point = 50;
     }
 
     @Override

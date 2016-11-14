@@ -22,7 +22,7 @@ public class PlayerOnEmptyLandTest {
     public void setUp() throws Exception {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
-        emptyLand = mock(EmptyLand.class);
+        emptyLand = new EmptyLand(TestHelper.LOWPRICE);
         player = new Player(TestHelper.PLAYER_1, dice, map);
         player.gainMoney(Game.DEFAULT_MONEY);
         when(map.getPlace(anyInt())).thenReturn(emptyLand);

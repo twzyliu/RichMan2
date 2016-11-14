@@ -14,5 +14,4 @@ public class StartingPoint extends Place {
     public void playerCome(Player player) {
         player.gotoStartingPoint();
     }
-
 }

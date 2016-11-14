@@ -21,19 +21,17 @@ public class PlayerOnOthersLandTest {
     public void setUp() throws Exception {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
-        emptyLand = mock(EmptyLand.class);
+        emptyLand = new EmptyLand(TestHelper.PRICE);
         player = new Player(TestHelper.PLAYER_1, dice, map);
         player.gainMoney(Game.DEFAULT_MONEY);
         other = new Player(TestHelper.PLAYER_2, dice, map);
         other.gainMoney(Game.DEFAULT_MONEY);
+        emptyLand.setOwner(other);
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
-        when(emptyLand.getOwner()).thenReturn(other);
     }
 
     @Test
     public void should_pay_when_player_walk_to_others_land_and_have_enough_money() throws Exception {
-        when(emptyLand.getBill()).thenReturn(TestHelper.LOWPRICE);
-
         int money = player.getMoney();
         assertThat(money > emptyLand.getBill(), is(true));
         player.roll();
@@ -43,7 +41,9 @@ public class PlayerOnOthersLandTest {
 
     @Test
     public void should_game_over_when_player_walk_to_others_land_and_no_enough_money() throws Exception {
-        when(emptyLand.getBill()).thenReturn(TestHelper.HIGHPRICE);
+        EmptyLand emptyLand = new EmptyLand(TestHelper.HIGHPRICE);
+        emptyLand.setOwner(other);
+        when(map.getPlace(anyInt())).thenReturn(emptyLand);
 
         int money = player.getMoney();
         assertThat(money < emptyLand.getBill(), is(true));
@@ -53,8 +53,6 @@ public class PlayerOnOthersLandTest {
 
     @Test
     public void should_not_pay_when_player_walk_to_others_land_and_hasgod() throws Exception {
-        when(emptyLand.getBill()).thenReturn(TestHelper.LOWPRICE);
-
         player.gainGod();
         int money = player.getMoney();
         player.roll();
@@ -64,8 +62,6 @@ public class PlayerOnOthersLandTest {
 
     @Test
     public void should_not_pay_when_player_walk_to_others_land_and_inprison() throws Exception {
-        when(emptyLand.getBill()).thenReturn(TestHelper.LOWPRICE);
-
         other.gotoPrison();
         int money = player.getMoney();
         player.roll();
@@ -75,8 +71,6 @@ public class PlayerOnOthersLandTest {
 
     @Test
     public void should_not_pay_when_player_walk_to_others_land_and_inhospital() throws Exception {
-        when(emptyLand.getBill()).thenReturn(TestHelper.LOWPRICE);
-
         other.gotoHosipital();
         int money = player.getMoney();
         player.roll();

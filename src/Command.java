@@ -10,29 +10,17 @@ public enum Command {
     }, TOOLS_BARRICADE {
         @Override
         public void action(Player player) {
-            if (player.getPoint() >= player.getBarricade().getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
-                player.gainPoint(0 - player.getBarricade().getPoint());
-                player.getBarricade().gainItem();
-                player.setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
-            }
+            player.getBarricade().buy(player);
         }
     }, TOOLS_ROBOT {
         @Override
         public void action(Player player) {
-            if (player.getPoint() >= player.getRobot().getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
-                player.gainPoint(0 - player.getRobot().getPoint());
-                player.getRobot().gainItem();
-                player.setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
-            }
+            player.getRobot().buy(player);
         }
     }, TOOLS_BOMB {
         @Override
         public void action(Player player) {
-            if (player.getPoint() >= player.getBomb().getPoint() & player.getToolsNum() < Player.MAX_TOOLS_NUM) {
-                player.gainPoint(0 - player.getBomb().getPoint());
-                player.getBomb().gainItem();
-                player.setStatus(STATUS.WAIT_FOR_TOOLS_COMMAND);
-            }
+            player.getBomb().buy(player);
         }
     }, GIFT_MONEY {
         @Override

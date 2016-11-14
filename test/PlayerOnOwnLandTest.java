@@ -24,8 +24,9 @@ public class PlayerOnOwnLandTest {
     public void setUp() throws Exception {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
-        emptyLand = mock(EmptyLand.class);
+        emptyLand = new EmptyLand(TestHelper.PRICE);
         player = new Player(TestHelper.PLAYER_1, dice, map);
+        emptyLand.setOwner(player);
         player.gainMoney(Game.DEFAULT_MONEY);
         player.gainMoney(Game.DEFAULT_MONEY);
     }
@@ -33,7 +34,6 @@ public class PlayerOnOwnLandTest {
     @Test
     public void should_wait_for_input_when_player_walk_to_my_own_land() throws Exception {
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
-        when(emptyLand.getOwner()).thenReturn(player);
 
         assertThat(player.getStatus(), is(STATUS.TURN_START));
         player.roll();
@@ -43,7 +43,6 @@ public class PlayerOnOwnLandTest {
     @Test
     public void turn_end_after_say_no() throws Exception {
         when(map.getPlace(anyInt())).thenReturn(emptyLand);
-        when(emptyLand.getOwner()).thenReturn(player);
 
         player.roll();
         player.sayNo();

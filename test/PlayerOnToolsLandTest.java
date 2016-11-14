@@ -20,7 +20,7 @@ public class PlayerOnToolsLandTest {
     public void setUp() throws Exception {
         dice = mock(Dice.class);
         map = mock(GameMap.class);
-        toolsLand = mock(ToolsLand.class);
+        toolsLand = new ToolsLand();
         player = new Player(TestHelper.PLAYER_1, dice, map);
         when(map.getPlace(anyInt())).thenReturn(toolsLand);
     }
@@ -62,6 +62,8 @@ public class PlayerOnToolsLandTest {
         int point = player.getPoint();
         int itemsNum = player.getToolsNum();
         player.command(Input.TOOLS_BARRICADE);
+
+        System.out.print(new Barricade().getPoint());
 
         assertThat(player.getPoint(), is(point));
         assertThat(player.getToolsNum(), is(itemsNum));
