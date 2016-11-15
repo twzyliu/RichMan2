@@ -18,6 +18,6 @@ public class GiftCommand implements CommandPreprocess {
 
     @Override
     public void action(Player player) {
-        command.action(player);
+        command.gainGift(player);
     }
 }

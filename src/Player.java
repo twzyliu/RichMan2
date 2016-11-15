@@ -183,20 +183,6 @@ public class Player {
         return false;
     }
 
-    public boolean buyTool(Items item) {
-        status = STATUS.WAIT_FOR_COMMAND;
-        int itemPoint = item.getPoint();
-        if (getToolsNum() < 10 & point >= itemPoint) {
-            item.gainItem();
-            out.print("恭喜购买道具成功!\n");
-            point -= itemPoint;
-            return true;
-        } else {
-            out.print("购买失败!请检查道具是否达到上限(10个),点数是否足够!\n按F键退出\n");
-            return false;
-        }
-    }
-
     public int getPlaceByLevel(int level) {
         int placeNum = 0;
         for (EmptyLand place : places) {
@@ -324,4 +310,15 @@ public class Player {
         return bomb;
     }
 
+    public void buyBarricade() {
+        getBarricade().buy(this);
+    }
+
+    public void buyRobot() {
+        getRobot().buy(this);
+    }
+
+    public void buyBomb() {
+        getBomb().buy(this);
+    }
 }

@@ -9,6 +9,7 @@ public class Barricade extends Items {
     public Barricade() {
         super();
         point = 50;
+        num = 0;
     }
 
     @Override

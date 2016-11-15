@@ -13,34 +13,24 @@ public enum Command {
     }, TOOLS_BARRICADE {
         @Override
         public void action(Player player) {
-            player.getBarricade().buy(player);
+            player.buyBarricade();
         }
 
         @Override
         public boolean buyTools(Game game, Player player) {
-            player.buyTool(new Barricade());
+            player.buyBarricade();
             return true;
         }
     }, TOOLS_ROBOT {
         @Override
-        public void action(Player player) {
-            player.getRobot().buy(player);
-        }
-
-        @Override
         public boolean buyTools(Game game, Player player) {
-            player.buyTool(new Robot());
+            player.buyRobot();
             return true;
         }
     }, TOOLS_BOMB {
         @Override
-        public void action(Player player) {
-            player.getBomb().buy(player);
-        }
-
-        @Override
         public boolean buyTools(Game game, Player player) {
-            player.buyTool(new Bomb());
+            player.buyBomb();
             return true;
         }
     }, TOOLS_WRONG_COMMAND {
@@ -129,7 +119,7 @@ public enum Command {
         public void gameCommand(Player player, Game game, int gameCommandNum) {
             game.printHelp();
         }
-    }, GAME_COMMAND_QUIT{
+    }, GAME_COMMAND_QUIT {
         @Override
         public void gameCommand(Player player, Game game, int gameCommandNum) {
             out.print("你失去了一个成为大富翁的机会...\n");
@@ -144,6 +134,7 @@ public enum Command {
     }
 
     public boolean buyTools(Game game, Player player) {
+        player.setStatus(STATUS.TURN_END);
         return false;
     }
 

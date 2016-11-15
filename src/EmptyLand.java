@@ -55,4 +55,8 @@ public class EmptyLand extends Place {
         player.gotoEmptyLand(getOwner(), getBill());
     }
 
+    public void destroy() {
+        level = 0;
+        owner = null;
+    }
 }

@@ -9,6 +9,7 @@ public class Bomb extends Items {
     public Bomb() {
         super();
         point = 50;
+        num = 0;
     }
 
     @Override

@@ -14,7 +14,7 @@ public enum STATUS {
         }
 
         @Override
-        public void action(Player player,Game game) {
+        public void action(Player player, Game game) {
             player.getMap().printMap();
             game.buyAndUpgradeActioin(player, "是否购买该处空地，%s元（Y/N）?\n");
         }
@@ -44,9 +44,12 @@ public enum STATUS {
                     "机器娃娃\t2\t30\n" +
                     " 炸 弹\t3\t50\t@\n" +
                     "你现在拥有%s点,按F键退出\n", player.getPoint());
-            boolean finish = false;
-            while (!finish) {
-                finish = new ToolsCommand(new Scanner(System.in).nextLine().toLowerCase()).buy(game, player);
+            boolean notFinish = true;
+            while (notFinish) {
+                Scanner scanner = new Scanner(System.in);
+                String command = scanner.nextLine().toLowerCase();
+                ToolsCommand toolsCommand = new ToolsCommand(command);
+                notFinish = toolsCommand.buy(game, player);
             }
         }
     }, WAIT_FOR_GIFT_COMMAND {
@@ -79,6 +82,6 @@ public enum STATUS {
     public void command(Player player, String command) {
     }
 
-    public void action(Player player,Game game) {
+    public void action(Player player, Game game) {
     }
 }

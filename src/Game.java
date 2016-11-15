@@ -22,6 +22,7 @@ public class Game {
     private Scanner input = new Scanner(System.in);
     private String command = "";
     private List<Player> players = new ArrayList<>();
+    private List<Player> nextRoundPlayers = new ArrayList<>();
     private List<Integer> playersNum;
     private int initFund = 0;
     private GameMap gameMap;
@@ -38,28 +39,44 @@ public class Game {
     public void round() {
         while (winner == null) {
             out.print("第" + round + "回合开始!\n");
-            for (Player player : players) {
+            for (int index = 0; index < players.size(); index++) {
+                Player player = players.get(index);
                 player.setStatus(STATUS.TURN_START);
                 gameMap.printMap();
-                if (!player.checkDays()) {
-                    while (player.getStatus() != STATUS.TURN_END & player.getStatus() != STATUS.GAME_OVER) {
-                        selectCommand(player);
-                        player.getStatus().action(player, this);
-                    }
-                }
+                selectCommand(player);
                 player.updateDays();
                 if (player.getStatus() == STATUS.GAME_OVER) {
-                    players.remove(player);
                     out.printf("%s 你破产了!哈哈哈!\n胜败乃兵家常事,大侠请重新来过!\n", player.getName());
+                    players.remove(player);
+                    index -= 1;
+                    desproy(player);
                 }
                 if (players.size() == 1) {
                     winner = players.get(0);
+                    break;
                 }
             }
             round += 1;
         }
         out.printf("恭喜 %s 获得胜利!\n", players.get(0).getName());
         exit(0);
+    }
+
+    private void desproy(Player player) {
+        for (EmptyLand emptyLand : player.getPlaces()) {
+            emptyLand.destroy();
+        }
+    }
+
+    public void selectCommand(Player player) {
+        if (!player.checkDays()) {
+            while (player.getStatus() != STATUS.TURN_END & player.getStatus() != STATUS.GAME_OVER) {
+                out.print(player.getName() + ">");
+                command = input.nextLine().toLowerCase();
+                new GameCommand(command).gameAction(player, this);
+                player.getStatus().action(player, this);
+            }
+        }
     }
 
     public void buyAndUpgradeActioin(Player player, String format) {
@@ -83,12 +100,6 @@ public class Game {
 
     public void getInput() {
         command = input.nextLine().toLowerCase();
-    }
-
-    private void selectCommand(Player player) {
-        out.print(player.getName() + ">");
-        command = input.nextLine().toLowerCase();
-        new GameCommand(command).gameAction(player, this);
     }
 
     public List<Items> getItems() {

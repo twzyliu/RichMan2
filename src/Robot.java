@@ -9,6 +9,7 @@ public class Robot extends Items {
     public Robot() {
         super();
         point = 30;
+        num = 0;
     }
 
     @Override

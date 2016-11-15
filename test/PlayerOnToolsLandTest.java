@@ -63,8 +63,6 @@ public class PlayerOnToolsLandTest {
         int itemsNum = player.getToolsNum();
         player.command(Input.TOOLS_BARRICADE);
 
-        System.out.print(new Barricade().getPoint());
-
         assertThat(player.getPoint(), is(point));
         assertThat(player.getToolsNum(), is(itemsNum));
         assertThat(player.getStatus(), is(STATUS.WAIT_FOR_TOOLS_COMMAND));
