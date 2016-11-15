@@ -11,4 +11,13 @@ public interface Input {
     String GIFT_GOD = "3";
     String YES = "y";
     String NO = "n";
+    String GAME_COMMAND_ROLL = "roll";
+    String GAME_COMAND_BLOCK = "block ";
+    String GAME_COMMAND_BOMB = "bomb ";
+    String GAME_COMMAND_ROBOT = "robot";
+    String GAME_COMMAND_SELL = "sell ";
+    String GAME_COMMAND_SELLTOOL = "selltool ";
+    String GAME_COMMAND_QUERY = "query";
+    String GAME_COMMAND_HELP = "help";
+    String GAME_COMMAND_QUIT = "quit";
 }

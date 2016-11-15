@@ -52,9 +52,7 @@ public class EmptyLand extends Place {
 
     @Override
     public void playerCome(Player player) {
-        Player owner = getOwner();
-        int bill = getBill();
-        player.gotoEmptyLand(owner, bill);
+        player.gotoEmptyLand(getOwner(), getBill());
     }
 
 }

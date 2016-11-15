@@ -13,8 +13,7 @@ public class Barricade extends Items {
 
     @Override
     public boolean use(GameMap gameMap, int position, int step) {
-        int target = position + step;
-        Place place = gameMap.getPlace(target);
+        Place place = gameMap.getPlace(position + step);
         boolean hasBarricade = getNum() >= 1;
         boolean notFar = step > -11 & step < 11;
         if (hasBarricade & notFar & place.isEmpty()) {

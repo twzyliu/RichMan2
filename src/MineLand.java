@@ -20,8 +20,7 @@ public class MineLand extends Place {
 
     @Override
     public void playerCome(Player player) {
-        int point = getPoint();
-        player.gotoMineLand(point);
+        player.gotoMineLand(getPoint());
     }
 
 }
